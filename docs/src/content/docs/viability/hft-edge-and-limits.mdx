@@ -1,0 +1,43 @@
+---
+title: "The HFT Parent — Edge & Its Limits"
+description: "Arrow's infrastructure comes from an HFT parent. That makes the reliability promises real — and creates a specific trap if mistaken for a finished retail platform."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+Arrow Trade's app infrastructure is driven by an existing HFT (high-frequency trading) firm. This is a real and uncommon advantage — but it answers one question while quietly raising another. Build-vs-buy on the core is settled (built, in-house). What remains worth saying is exactly two things: what the HFT lineage makes *credible*, and what it conspicuously does *not* solve.
+
+## What the HFT parent makes credible
+
+Most of Arrow's reliability claims are, for any other new broker, marketing. With an HFT parent they have substance:
+
+| Promise | Why it's credible here, not elsewhere |
+|---|---|
+| **Latency Ledger** (per-order client→OMS→exchange timestamps) | An HFT firm already instruments the order path to the microsecond — exposing it to users is a presentation layer over telemetry that already exists, not a new system. |
+| **"Predictable latency"** as a brand | Latency discipline is the HFT core competency. Arrow can make claims like Fyers' "7ms" *and actually prove them*, which is the [trust-by-proof](/moats/competing-moats/) thesis applied to speed. |
+| **Co-location / proximity hosting** | Exchange-adjacent infrastructure is standard for HFT and expensive for a startup to stand up cold. |
+| **Deterministic order-state machine** | Rigorous order-event modeling is native to systematic execution, not bolted on. |
+
+This is the rare case where a differentiator is defensible because the capability is *inherited and pre-existing*, not promised. It should be stated in the docs as a moat amplifier — but immediately qualified, because the qualifier is where teams go wrong.
+
+## The trap: prop-HFT infra ≠ retail-broker platform
+
+The failure mode is over-trusting "we have HFT infrastructure" and under-investing in the parts an HFT firm never had to build. They are genuinely different problems:
+
+| Dimension | What HFT optimizes | What retail broking demands |
+|---|---|---|
+| **Concurrency** | A handful of proprietary accounts, single fast path | **Millions of simultaneous logins at 9:15 AM** — the login storm that takes brokers down |
+| **Market data** | Lowest-latency feed to a few strategies | **Fan-out of live data to millions of client sessions** — a different scaling axis entirely |
+| **Risk** | Firm-level prop risk, self-managed | **Per-client RMS, margin, square-off, MWPL** across a huge heterogeneous book |
+| **Surrounding systems** | None needed | **KYC, funds, back-office, statements, support tooling, grievance** — the unglamorous 80% of a broker |
+| **Failure behavior** | Halt and fix; few stakeholders | **Graceful degradation under retail stampede** — the Cloudflare/expiry-day scenario where millions need to exit at once |
+
+Every outage in the [Pain Signals research](/pain-signals/verified-pain-registry/) — Zerodha's stale prices at open, the login failures, the expiry-day freezes — happened at the **retail-scale layer**, not the order-pipeline layer. An HFT parent solves the part that was never Arrow's biggest risk, and contributes little to the part that is.
+
+<Aside type="caution" title="The discipline this demands">
+The HFT inheritance buys credibility on latency and order-path correctness. It does **not** buy the login-storm, data-fan-out, client-RMS and back-office layers — which is precisely where retail brokers die. The reliability brand will be won or lost on those, so the org must resource them as first-class engineering, not assume they come for free with the parent's stack. State the edge proudly; budget for the gap honestly.
+</Aside>
+
+## The other half of the parent: a structural risk
+
+The HFT lineage is not only an asset. A broker owned by or adjacent to a proprietary HFT firm carries a conflict-of-interest exposure that SEBI is acutely sensitive to — the headline Arrow-specific risk examined in the [Pre-Mortem](/viability/pre-mortem/). The same fact that powers the reliability moat needs an information-barrier and governance answer before it becomes a licensing or trust problem.

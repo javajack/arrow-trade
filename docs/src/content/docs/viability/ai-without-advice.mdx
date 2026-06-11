@@ -1,0 +1,49 @@
+---
+title: "AI Without Advice"
+description: "The regulatory boundary every Indian broker's AI must respect, where AI is genuinely safe and valuable, and the honest anti-AI-washing stance."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+A 2026 broker without an AI position is conspicuous, and the rest of the docs are silent on it. But in the Indian regulated market, AI in broking has one hard wall that decides everything — and most competitors are about to walk straight into it. This page plants the boundary before someone builds an AI tip engine.
+
+## The wall: AI cannot give advice
+
+Under SEBI's framework, **investment advice and research recommendations are licensed activities** (Investment Adviser / Research Analyst registration). Two threads from our own research converge into a hard constraint:
+
+- The [2022 circular](/algo/regulatory-framework/) bars brokers from referencing past/expected returns and from associating with platforms that market performance — aimed squarely at "this strategy will make you X" claims.
+- The black-box algo rules require a registered Research Analyst behind any non-transparent decision logic.
+
+An AI that says "buy this," "this option looks good," or "your portfolio should hold X" is **giving advice** — and an unregistered, unaccountable adviser at that. For a broker, an AI tip feature is not a product risk; it is a **regulatory landmine** that also reintroduces exactly the gambling-adjacent dynamics SEBI is curbing.
+
+So the design rule is absolute: **Arrow's AI is non-advisory by construction.** It explains, narrates, detects and assists — it never recommends a trade or predicts a return.
+
+<Aside type="caution" title="The line, concretely">
+Allowed: "Your order was rejected because margin was short by ₹4,300." Not allowed: "You should add ₹4,300 and re-enter." The first explains a fact; the second advises an action. The entire AI surface lives on the left side of that line.
+</Aside>
+
+## Where AI is genuinely safe and valuable
+
+The non-advisory constraint is not a limitation — it points AI at the operational pain the [Pain Signals research](/pain-signals/verified-pain-registry/) showed users actually suffer, none of which requires telling anyone what to trade:
+
+| Use | What it does | Why it's safe |
+|---|---|---|
+| **Support copilot** | Answers "why was my order rejected / why is this charge here / why can't I withdraw this" with the user's actual order and ledger data | Descriptive — explains the system, the #1 support complaint, no advice |
+| **Charge & tax narration** | Plain-language walkthrough of the True Cost Meter and CA packet | Explains numbers the broker already computed |
+| **Post-trade journal analysis** | "Your losing trades cluster on expiry-day entries after 2pm" — descriptive pattern surfacing | Reflects the user's own history back; doesn't prescribe |
+| **Fraud / anomaly detection** | Flags impersonation, account-takeover, abnormal order patterns | Pure surveillance — protects the user, never advises |
+| **Onboarding / readiness guidance** | Explains KYC states, segment activation, what's pending | Operational, not financial advice |
+
+Every item is **descriptive or operational**. The richest, most-engaged complaints in the research were "why did the system do this to me" — and an AI that answers *that*, accurately, with the user's real data, is both the highest-value application and the one squarely inside the regulatory line.
+
+## The anti-AI-washing stance
+
+Every competitor will slap "AI" on something in 2026, and many will inch toward AI-generated tips — both because it demos well and because they haven't thought through the regulatory wall. That creates a positioning opening that fits Arrow's whole [trust-by-proof brand](/moats/competing-moats/):
+
+> **"AI explains your trading. It never tells you what to trade."**
+
+This is honest, differentiated, and regulator-aligned. It also lets Arrow use the HFT parent's genuine quant/ML talent where it belongs — anomaly detection, execution analytics, surveillance — **on the operational and protective side, never on retail advice.** The competitor who builds the AI tip engine gets a demo and a SEBI problem; Arrow gets a support deflection moat and a clean compliance posture.
+
+<Aside type="note" title="Bottom line">
+The boundary isn't a constraint to work around — it's the strategy. Non-advisory AI points the technology at the operational pain users genuinely have, keeps Arrow clear of the licensing and gambling-adjacency traps, and gives the brand a true claim no tip-pushing competitor can make.
+</Aside>

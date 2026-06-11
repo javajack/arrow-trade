@@ -90,6 +90,16 @@ export default defineConfig({
             { label: 'Wow Moments — Validation', slug: 'moats/wow-validation' },
           ],
         },
+        {
+          label: 'Viability & Hard Questions',
+          items: [
+            { label: 'Economics & the LTV Paradox', slug: 'viability/economics-ltv-paradox' },
+            { label: 'The HFT Parent — Edge & Limits', slug: 'viability/hft-edge-and-limits' },
+            { label: 'The Trust Cold-Start', slug: 'viability/trust-cold-start' },
+            { label: 'Pre-Mortem — How This Fails', slug: 'viability/pre-mortem' },
+            { label: 'AI Without Advice', slug: 'viability/ai-without-advice' },
+          ],
+        },
       ],
     }),
     mdx(),

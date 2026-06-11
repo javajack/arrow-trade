@@ -1,0 +1,67 @@
+---
+title: "Pre-Mortem — How This Fails"
+description: "The disciplined bear case: the realistic ways Arrow doesn't work, including the conflict-of-interest risk unique to an HFT-owned broker, each with early-warning signals."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+Every other page is a case for why Arrow works. This one is the discipline of assuming it's two years later and the company has failed — then asking what most likely killed it. Naming the failure modes with **early-warning signals** is what lets the team see them coming while there's still time to act. Ordered by a blend of likelihood and lethality.
+
+## The headline Arrow-specific risk: broker × HFT-prop conflict of interest
+
+This is the failure mode that flows directly from Arrow's structure, and the one a SEBI reviewer raises first. A broker owned by or adjacent to a proprietary HFT firm sits on a genuine conflict: the same group both **runs the trading venue infrastructure** and **trades for its own account.**
+
+| The fear | Why it's credible to a regulator/user |
+|---|---|
+| Front-running / information advantage | The group could, in perception or reality, see retail order flow and trade ahead of it. |
+| Preferential infrastructure | Prop strategies could get latency or access advantages over retail clients on the same stack. |
+| Order-flow exploitation | Retail flow as a signal for the prop book. |
+
+SEBI's sensitivity here is not hypothetical — the **NSE co-location episode** made broker/prop infrastructure-fairness one of the most scrutinized areas in Indian market structure ([Algo regulation](/algo/regulatory-framework/) documents how tightly access is now governed). For an HFT-owned broker this is the existential licensing-and-trust risk: mishandled, it blocks the license, invites enforcement, or detonates the [trust cold-start](/viability/trust-cold-start/) the moment a journalist frames "your HFT broker is trading against you."
+
+**Mitigations that must be designed in, not bolted on:** hard information barriers between the broker and the prop desk; a public, auditable guarantee of **no prop order priority** on shared infrastructure; segregation of retail order-flow data; and proactive disclosure rather than waiting to be asked. The same parent that powers the [reliability moat](/viability/hft-edge-and-limits/) forfeits it instantly if this is weak.
+
+**Early-warning signals:** regulator questions clustering on infra fairness during licensing; any internal request for prop access to retail flow; community/press speculation about the parent relationship.
+
+## The market-structural failure modes
+
+### CAC inflation in a saturated market
+India has ~26 crore demat accounts and *falling* active-client conversion ([Market Landscape](/market-landscape/)). Acquisition is crowded and getting dearer; if Arrow's community/migration-led CAC doesn't stay well below mass-market levels, the [unit economics](/viability/economics-ltv-paradox/) never close.
+**Early warning:** blended CAC rising toward incumbent levels; organic/referral share of new accounts falling below plan.
+
+### Price war to zero
+m.Stock and Kotak are already at ₹10/₹0-API ([Pricing research](/experience/pricing-margin-mtf/)). If the differentiator collapses to headline price, a better-capitalized incumbent can simply undercut. The defense is that Arrow competes on *total transparent cost and workflow*, not headline fee — but that only holds if users actually value it over the sticker number.
+**Early warning:** win/loss feedback citing price alone; True Cost Meter engagement low.
+
+### Incumbents clone the cost-transparency layer
+The True Cost Meter and savings card are software, not patents. Zerodha or Dhan could ship a credible copy in a quarter.
+**Early warning:** a major incumbent announces an all-in cost breakdown feature. *Mitigation:* the harder-to-copy moats are the time-axis ones — proof history, data gravity, community ([Competing Moats](/moats/competing-moats/)) — so the cost-transparency wedge must be used to *buy time* to build those, not relied on as the durable edge.
+
+### Further F&O regulatory tightening
+The wedge pool is already shrinking ([the LTV paradox](/viability/economics-ltv-paradox/)). Another curb — more lot-size hikes, expiry rationalization, suitability gates — shrinks it further, faster than the engine lines (MTF/API/assets) can ramp to compensate.
+**Early warning:** SEBI consultation papers signaling new derivatives measures; engine-line revenue still sub-scale when wedge volume drops.
+
+## The execution failure modes
+
+### The retail-scale layer takes the brand down
+Over-trusting the HFT inheritance and under-building the login-storm / data-fan-out / RMS / back-office layer ([HFT limits](/viability/hft-edge-and-limits/)). The first major outage at open or on expiry day defines the brand — and a reliability-branded broker that has a visible outage suffers *more* reputational damage than one that never made the claim.
+**Early warning:** load tests not reaching realistic open-storm concurrency; incident runbooks/status page not ready before launch.
+
+### The reliability promise becomes a liability
+Branding on "every order's state is visible" raises the penalty for any gap. Promising proof and then failing to deliver it is worse than never promising.
+**Early warning:** Latency Ledger / Order Health Center slipping from launch scope while the marketing leads with them.
+
+## Pre-mortem summary
+
+| Failure mode | Lethality | Primary early-warning signal |
+|---|---|---|
+| HFT conflict-of-interest | **Existential** | Regulator infra-fairness scrutiny; prop requests for retail flow |
+| Retail-scale outage at launch | High | Load tests short of open-storm concurrency |
+| CAC inflation | High | Organic/referral share falling below plan |
+| Price war to zero | Medium-high | Win/loss citing price alone |
+| F&O tightening | Medium-high | New SEBI derivatives consultation |
+| Cost-layer cloned | Medium | Incumbent ships all-in cost breakdown |
+
+<Aside type="note" title="The point of a pre-mortem">
+None of these are reasons not to build — they are the dashboard. The conflict-of-interest risk in particular is *manageable but only by design*, and it must be solved before launch, not after the first headline. A plan that names how it dies is more fundable than one that pretends it can't.
+</Aside>

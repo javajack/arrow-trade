@@ -23,6 +23,11 @@ const expectedRoutes = [
   'moats/segment-wedges',
   'moats/best-of-breed-blueprint',
   'moats/wow-validation',
+  'viability/economics-ltv-paradox',
+  'viability/hft-edge-and-limits',
+  'viability/trust-cold-start',
+  'viability/pre-mortem',
+  'viability/ai-without-advice',
 ];
 
 function walk(dir) {

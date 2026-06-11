@@ -1,0 +1,81 @@
+---
+title: "Economics & the LTV Paradox"
+description: "The supply-side question the rest of the docs don't answer: can the serious-trader wedge actually make money — when the wedge is people who lose money and quit?"
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+import Mermaid from '../../../components/Mermaid.astro';
+
+<Aside type="note" title="Why this section exists">
+Everything before this point is demand-side — what users want, what's broken, what would delight them. This section is the supply-side stress test: economics, the founder structure's edge and risk, the cold-start, the bear case, and the AI boundary. It's the diligence reader's section, deliberately placed last. Numbers here are **frameworks with stated assumptions**, not forecasts — the point is the shape of the economics, not false precision.
+</Aside>
+
+## The paradox, stated honestly
+
+Our own research contains a contradiction the go-to-market plan never confronts. The primary wedge is active F&O traders. SEBI's data ([Market Landscape](/market-landscape/)) says **91% of individual F&O traders lose money**, and unique derivatives traders **fell ~20% YoY** after the October 2024 curbs. So the wedge is, bluntly:
+
+> a **shrinking pool** of people who **lose money** and then **quit the market.**
+
+A broker whose core revenue is these users' trading activity is monetizing a self-liquidating base. Acquire a cohort, and a large fraction stops trading within a year — not because they switched brokers, but because they *left the activity*. That is a worse retention problem than churn-to-a-competitor, and no amount of UX fixes it.
+
+This is the question a serious investor asks in the first meeting. The honest answer is not to deny it — it's to show why the model works *anyway*.
+
+## The reframe that resolves it
+
+The resolution is to stop monetizing the trader *winning* and start monetizing **activity-duration** — how long a trader stays alive in the market before they blow up or quit. This single shift realigns the entire product:
+
+| Churn-based incumbent | Arrow's aligned model |
+|---|---|
+| Profits from trade *frequency*, indifferent to outcomes | Profits from trader *longevity* |
+| Risk tools are a cost center | Risk tools are the **LTV engine** — a trader who doesn't blow up trades for years |
+| Gamification increases activity short-term, accelerates blow-up | Guardrails reduce blow-up, extend the revenue tail |
+
+The features already specified — margin-shortfall forecasts, expiry guardrails, true-cost meter, "can I exit?" depth warnings ([Feature Parity Matrix](/strategy/feature-parity-matrix/)) — are usually framed as *trust* features. The economic point is sharper: **they are the only retention lever that works on a base that quits when it loses.** Helping the 91% lose *slower* is identical to maximizing their lifetime value. Arrow's incentives and the user's survival point the same direction; for a churn-based broker they point opposite. That alignment is the defensible economic story, and it is true rather than spun.
+
+<Aside type="caution" title="The limit of the reframe">
+It extends LTV; it does not make a perpetual customer out of someone destined to lose. The model still requires that the base does not depend on F&O brokerage as the engine — only as the wedge. That is the next point.
+</Aside>
+
+## Revenue mix is survival, not diversification
+
+The plan must say plainly what the GTM soft-pedals: **F&O brokerage is the acquisition wedge, not the engine.** Post-curbs and post-true-to-label, headline brokerage is structurally compressed (m.Stock/Kotak already at ₹10/₹0-API — [Pricing research](/experience/pricing-margin-mtf/)). The engine is the set of revenue lines that monetize *assets and infrastructure*, which are far less regulator- and churn-exposed:
+
+<Mermaid title="Wedge vs engine — where the money actually comes from" chart={`flowchart LR
+    W["ACQUISITION WEDGE\nF&O brokerage\n(low margin, churn-exposed,\nregulator-squeezed)"] -->|brings high-intent\ntraders in| E
+    subgraph E["THE ENGINE (asset + infra revenue)"]
+      M["MTF / margin funding\ninterest on the book"]
+      A["API / pro subscriptions\n+ data tiers"]
+      P["Pledge / collateral\n+ float economics"]
+      I["Investor layer\nMF / bonds / wealth assets"]
+    end
+    E --> R["Revenue resilient to\nF&O cycle + price wars"]
+`} />
+
+The strategic claim: a new broker that lives on F&O brokerage dies in the next price war or curb. One that uses F&O to *acquire* and then earns on MTF, API subscriptions, pledge/float and the investor-asset layer has a base that compounds even as a cohort of traders quits. This is why the [Phase 2 investor expansion](/strategy/go-to-market/) is not optional growth — it is the de-risking of the entire model.
+
+## The structural edge: amortized infrastructure
+
+The cost that kills most new Indian brokers is building and running reliable trading infrastructure — and then the support and reliability burden when it fails. Arrow inherits a working low-latency stack from its HFT parent ([The HFT Parent](/viability/hft-edge-and-limits/)). The economic consequence is specific:
+
+- The largest fixed-cost line for a greenfield broker (core tech build + run) is **substantially amortized** against an existing operation rather than financed from zero.
+- That lowers the break-even client count and lengthens runway at a given capital base — directly relevant to the **₹75–150 crore** envelope estimated in the [GTM capital plan](/strategy/go-to-market/).
+
+This is a genuine margin advantage, but it must be stated with its limit: the HFT parent amortizes the *order-pipeline* cost, not the *retail-platform* cost — and those are different bills, the subject of the next page.
+
+## A break-even framework (assumptions, not a forecast)
+
+The point of putting this in the docs is to force the model to be *legible*, not to pretend at precision. The honest framing:
+
+| Lever | Why it dominates the model |
+|---|---|
+| **Activated-trader count × activity-duration** | Not raw demat sign-ups. The metric is funded accounts placing recurring orders, weighted by how many months they stay active. The reframe above is an attempt to push the second term up. |
+| **MTF book size × net interest spread** | The most scalable engine line; gated by capital and credit risk, not by trader count. |
+| **API/pro subscription attach rate** | High-margin, sticky (integration switching cost), and the segment most willing to pay — but small in absolute numbers. |
+| **Blended infra cost per active client** | Where the HFT amortization shows up; the lower this is, the lower the break-even count. |
+| **CAC** | Community/migration-led acquisition ([Pain Signals](/pain-signals/verified-pain-registry/) surfaced a tax-friction migration wedge) keeps this below mass-market levels — the only way the unit economics close on a cost-sensitive base. |
+
+The model closes if, and only if, the engine lines (MTF + API + assets) cross fixed cost before the F&O wedge's churn erodes the funnel. Stating that as the explicit success condition is more useful to a founder than any single rupee figure — it tells you which dials to watch.
+
+<Aside type="tip" title="The one-sentence version">
+Arrow does not get rich on F&O brokerage; it uses F&O to acquire high-intent traders cheaply, keeps them alive longer than churn-based brokers do, and earns on the assets and infrastructure around them — on a cost base the HFT parent already paid down. Whether that closes is a question of *engine-line ramp vs wedge churn*, which is the number to govern the company by.
+</Aside>

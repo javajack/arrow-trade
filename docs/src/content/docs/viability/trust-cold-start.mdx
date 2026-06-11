@@ -1,0 +1,50 @@
+---
+title: "The Trust Cold-Start"
+description: "Trust-by-proof needs a track record a new broker doesn't have. How Arrow bootstraps custody trust from zero, post-Karvy, without years of history."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+The [Competing Moats](/moats/competing-moats/) page argues trust-by-proof beats trust-by-promise. True — but proof accumulates over time, and on day one Arrow has none. This is the hardest unsolved problem in the whole plan: **how do you get an Indian to move their savings to an unknown custodian, when the category's defining memory is Karvy?**
+
+## Why custody trust is the brutal case
+
+Trust in broking is not like trust in most products. It is **binary and catastrophic-tailed**:
+
+- A product can be 95% good and thrive. A custodian that is 99.9% safe and mishandles your holdings once is *finished* — the failure is total, not graded.
+- The downside is your entire portfolio, so users demand near-certainty *before* committing, not after a trial.
+- Karvy (₹2,000 crore of client securities misused, [Support/Trust research](/experience/support-trust-brand/)) made "can my broker misuse my holdings?" a permanent category fear that every new entrant inherits and must answer unprompted.
+
+So the new-broker trust ask is the steepest in fintech, and "we'll prove it over time" is circular — you need trust to get the users whose experience generates the proof.
+
+## The resolution: don't ask for the big trust first
+
+The cold-start breaks if you stop demanding primary-capital trust on day one and instead **lower the size of the first ask**. Three levers, in order of leverage:
+
+### 1. Parent-reputation transfer
+
+A pure startup asks for trust from zero. Arrow does not — the **HFT parent is an existing, SEBI-regulated, operationally-proven entity** ([The HFT Parent](/viability/hft-edge-and-limits/)). That standing is a credibility anchor a garage startup lacks: "backed by a firm that has run regulated market infrastructure for years" is a materially smaller ask than "trust this new app." This is the single biggest cold-start advantage Arrow has, and it should be foregrounded in positioning — provided the conflict-of-interest governance ([Pre-Mortem](/viability/pre-mortem/)) is airtight, because the same parent that confers credibility can forfeit it.
+
+### 2. "Best second account" as a trust-reducer
+
+The [Pain Signals research](/pain-signals/verified-pain-registry/) surfaced that serious traders **open a second account and test it before migrating primary capital** — they were doing exactly this in the "switching from Groww/Zerodha" threads. This is not a consolation prize; it is the *correct cold-start wedge*:
+
+- Being the best *second* account asks for a tiny fraction of trust — a small balance, a few trades, an API key — not a life's savings.
+- It lets Arrow generate the proof (clean payouts, accurate reports, no incidents) on low-stakes capital, which then earns the right to ask for primary capital.
+- Trust cold-start and the second-account GTM are therefore **the same move**: design explicitly to be the easy, low-commitment second account, and let demonstrated reliability pull primary assets over.
+
+<Aside type="tip" title="Design implication">
+Optimize onboarding and early UX for the *evaluator*, not the convert: frictionless small-balance funding, an API key in minutes, instant first payout, a clean first contract note and tax line. The first ₹10,000 and the first withdrawal are the entire trust transaction — nail them and the portfolio follows.
+</Aside>
+
+### 3. Radical custody transparency from day one
+
+Where incumbents made custody proof a compliance afterthought, Arrow makes it a launch feature — the [custody-transparency leapfrog](/moats/competing-moats/): a plain-language "your assets are safe" reconciliation screen (broker vs CDSL/NSDL vs exchange), pledge audit, and discrepancy alerts. This substitutes *inspectability* for *track record* — you can't show ten years of safety, but you can let the user verify safety today, every day. It is the only form of proof available on day one, so it must ship at launch, not later.
+
+## The sequence
+
+<Card title="The trust ladder" icon="seti:lock">
+Parent credibility lowers the entry barrier → low-stakes second-account proves reliability on small capital → daily custody transparency substitutes for track record → demonstrated clean payouts/reports/incidents earn primary-capital trust → accumulated proof becomes the [trust-by-proof moat](/moats/competing-moats/) that compounds.
+</Card>
+
+The mistake would be to launch demanding primary-capital trust on the strength of features alone. Trust is the gate; the cold-start is solved by making the first ask small enough to grant, then earning the rest.
