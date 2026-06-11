@@ -6,6 +6,12 @@ const docsDir = path.join(root, 'src/content/docs');
 const expectedRoutes = [
   'index',
   'market-landscape',
+  'experience',
+  'strategy',
+  'moats',
+  'algo',
+  'pain-signals',
+  'viability',
   'experience/onboarding-money-backoffice',
   'experience/trading-experience-fno-api',
   'experience/investor-research-ecosystem',
@@ -41,7 +47,9 @@ const pages = walk(docsDir).filter((file) => /\.(md|mdx)$/.test(file));
 const routeToFile = new Map(
   pages.map((file) => {
     const rel = path.relative(docsDir, file).replace(/\\/g, '/').replace(/\.(md|mdx)$/, '');
-    return [rel, file];
+    // A folder index (e.g. experience/index) routes to the folder root (experience).
+    const route = rel === 'index' ? 'index' : rel.replace(/\/index$/, '');
+    return [route, file];
   }),
 );
 

@@ -51,6 +51,7 @@ export default defineConfig({
         {
           label: 'Experience Research',
           items: [
+            { label: 'Overview', slug: 'experience' },
             { label: 'Onboarding, Money and Back Office', slug: 'experience/onboarding-money-backoffice' },
             { label: 'Trading, F&O and APIs', slug: 'experience/trading-experience-fno-api' },
             { label: 'Investor Research Ecosystem', slug: 'experience/investor-research-ecosystem' },
@@ -61,6 +62,7 @@ export default defineConfig({
         {
           label: 'Strategy',
           items: [
+            { label: 'Overview', slug: 'strategy' },
             { label: 'Feature Parity Matrix', slug: 'strategy/feature-parity-matrix' },
             { label: 'Validated Feature Ideas', slug: 'strategy/validated-feature-ideas' },
             { label: 'Go-To-Market Strategy', slug: 'strategy/go-to-market' },
@@ -69,6 +71,7 @@ export default defineConfig({
         {
           label: 'Pain Signals (Voice of the Market)',
           items: [
+            { label: 'Overview', slug: 'pain-signals' },
             { label: 'Verified Pain Registry', slug: 'pain-signals/verified-pain-registry' },
             { label: 'Pain by Customer Type', slug: 'pain-signals/pain-by-customer-type' },
           ],
@@ -76,6 +79,7 @@ export default defineConfig({
         {
           label: 'Algo Trading',
           items: [
+            { label: 'Overview', slug: 'algo' },
             { label: 'Regulation — The Framework', slug: 'algo/regulatory-framework' },
             { label: 'Platform Landscape', slug: 'algo/platform-landscape' },
             { label: 'Productizing Compliance', slug: 'algo/productizing-registration' },
@@ -84,6 +88,7 @@ export default defineConfig({
         {
           label: 'Moats & Wedges (Deep Synthesis)',
           items: [
+            { label: 'Overview', slug: 'moats' },
             { label: 'Competing Moats', slug: 'moats/competing-moats' },
             { label: 'Segment Wedges', slug: 'moats/segment-wedges' },
             { label: 'Best-of-Breed Blueprint', slug: 'moats/best-of-breed-blueprint' },
@@ -93,6 +98,7 @@ export default defineConfig({
         {
           label: 'Viability & Hard Questions',
           items: [
+            { label: 'Overview', slug: 'viability' },
             { label: 'Economics & the LTV Paradox', slug: 'viability/economics-ltv-paradox' },
             { label: 'The HFT Parent — Edge & Limits', slug: 'viability/hft-edge-and-limits' },
             { label: 'The Trust Cold-Start', slug: 'viability/trust-cold-start' },
