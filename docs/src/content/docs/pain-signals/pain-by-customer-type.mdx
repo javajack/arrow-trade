@@ -1,0 +1,105 @@
+---
+title: "Pain by Customer Type"
+description: "The verified pain registry mapped to each customer segment — what bites them, in their own words, and exactly what wins them over."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+The [Verified Pain Registry](/pain-signals/verified-pain-registry/) catalogs *what* is broken; this page maps it to *who bleeds from it*. Each segment below gets: the pains that hit them hardest (with the evidence), the moment that would make them switch brokers, and the Arrow response — cross-linked to where it's already designed in the strategy.
+
+## Intraday and expiry F&O traders (scalpers included)
+
+**Their pains, ranked:** stale prices and freezes mid-trade (themes 1, 10), exits rejected or auto-squared-off without explanation (theme 2), missing speed tools (one-tap, cancel-same-strike, kill button), market-hours upsell interrupting open positions (theme 8).
+
+**In their own words:** *"₹20,000 lost because the position couldn't be exited"* (m.Stock, May 2026); exit orders rejected at 15:13:05 with auto square-off following (Upstox, Jan 2026); *"unstable exactly when volatility hits."* The brutal context from [SEBI's study](https://economictimes.indiatimes.com/markets/stocks/news/91-of-individual-fo-traders-lost-money-in-fy25-despite-sebi-curbs-study/articleshow/122302956.cms): 91% of these users already lose money — platform failures feel existential, not inconvenient.
+
+**Switch trigger:** the first outage or rejected exit that costs real money. Outage days are the highest-churn moments in the category.
+
+**Arrow response:** order-price parity as an invariant (show tick age + stale-data warnings), exact pre/post reject reasons, emergency flatten/kill switch, square-off rules displayed before the window, backup exit channel for infra failures, no marketing during market hours. Already specified across [Expiry Mode and the Order Health Center](/strategy/feature-parity-matrix/).
+
+## Option sellers and positional F&O
+
+**Their pains:** margin errors and phantom "insufficient funds" rejections (theme 2), pledge/unpledge and MTF interest opacity (theme 3 — ICICI unpledge charges, Dhan MTF-conversion interest confusion), position misclassification (Shoonya's sold-holdings-became-short-sell), contract-note arithmetic nobody can reconcile.
+
+**Switch trigger:** a rejected second leg or a margin penalty they couldn't have predicted from the app.
+
+**Arrow response:** always-visible collateral split, EOD margin-shortfall forecast, rejected-leg preview, MTF interest in ₹/day, per-leg charge attribution — the capital-efficiency stack in [Segment Wedges](/moats/segment-wedges/) and [pricing research](/experience/pricing-margin-mtf/).
+
+## Algo and API traders
+
+**Their pains:** the most engaged complaint corpus anywhere in the window — token/auth churn (Dhan's 153-post thread; users building Telegram bots to refresh tokens), static-IP false rejections (DH-905 on whitelisted VPS IPs), endpoint deprecations discovered via 410 errors, bad historical/expired-contract data, cloud IP-range blocks (Angel × Oracle), missing workflow APIs (watchlists).
+
+**Switch trigger:** an API breaking change that costs a trading day. The April 2026 regulatory rollout multiplied these moments — every API trader in India was forced to re-evaluate their broker simultaneously.
+
+**Arrow response:** API-as-product — versioning with migration calendars, mobile token flows, deterministic IP states with diagnostics, sequence-numbered feeds, sandbox, machine-readable incident webhooks. The full thesis: [Productizing Algo Compliance](/algo/productizing-registration/).
+
+## Long-term investors
+
+**Their pains:** holdings that disagree with reality (the 40-post "missing funds and reduced quantities" MF thread; app-vs-web mismatches), AMC/DP charge surprises on supposedly-free accounts (theme 3), payout-eligibility opacity (theme 4), quality decay of a platform they rarely open but deeply depend on.
+
+**Switch trigger:** slow-burn distrust — usually detonated at tax season or during a withdrawal that stalls.
+
+**Arrow response:** reconciliation status with "as of" timestamps on every holding, balance-bucket ledger explaining every non-withdrawable rupee, CA-ready reports, custody proof. See [Portfolio Intelligence and back-office plans](/strategy/feature-parity-matrix/).
+
+## First-time investors
+
+**Their pains:** KYC/onboarding stuck for days despite escalation (Sahi), login loops (HDFC Sky), device-binding lockouts (Angel One), spam/OTP floods after sharing data (Groww review, Jun 2026), zero-AMC promises that later sprout charges — and the category-level fraud surface: impersonation scams (fake Zerodha ₹70L, fake Shoonya ₹75L cases) that poison first-timer trust in everyone.
+
+**Switch trigger:** they rarely switch — they *abandon*. A stuck onboarding or a surprise charge ends the relationship before it starts.
+
+**Arrow response:** honest readiness states in onboarding, preflight KYC checks, charge schedule shown at signup (not discovered in the ledger), verified-communications center and impersonation reporting. See [Segment Wedges](/moats/segment-wedges/).
+
+## MTF / leverage users
+
+**Their pains:** interest and pledge charges applying in ways the app never previewed (Dhan conversion-interest thread), negative balances appearing without narrative (Angel One, Kotak), plan-change refunds denied (Kotak Neo).
+
+**Switch trigger:** the first interest debit that exceeds what they mentally signed up for.
+
+**Arrow response:** ₹/day interest meter before order placement, one-tap repay/convert, charge preview on every funding action — [pricing/MTF design](/experience/pricing-margin-mtf/).
+
+## Commodity traders
+
+**Their pains:** being the afterthought segment — Upstox *disabled MCX API trading entirely* during the April 2026 regulatory rollout with users left asking in forums; evening-session reliability invisible in every broker's status story.
+
+**Switch trigger:** an evening-session failure or a segment switched off under them.
+
+**Arrow response:** per-exchange/per-segment readiness display, MCX night-session status, delivery-risk warnings — the [MCX cockpit](/experience/trading-experience-fno-api/).
+
+## Global/US-stock investors
+
+**Their pains (INDmoney corpus):** hidden FX conversion spreads, money stuck after partner-bank offboarding (SBM), nomination updates impossible post-update, account closure requiring support that never calls back.
+
+**Switch trigger:** any "money stuck" event — cross-border amplifies panic.
+
+**Arrow response (when Phase-2/3 global launches):** transparent FX spread display, partner-dependency disclosure, exit/closure as a first-class flow. Until then this validates the [GTM decision](/strategy/go-to-market/) to defer global investing rather than ship it badly.
+
+## HNIs and families
+
+**Their pains:** payout-limit opacity at size (the ₹5-crore withdrawal dispute — whatever the facts, the *category fear* is "will I get my money out at scale?"), family static-IP sharing broken under the algo framework (a four-account family with no workaround), multi-account coordination left entirely manual.
+
+**Switch trigger:** one large payout handled badly; conversely, white-glove handling of size is the cheapest HNI acquisition there is.
+
+**Arrow response:** published large-payout SLAs, family workspace with the PAN/UCC-mapped IP-sharing flow built *before* exchange clarity lands ([algo opportunities](/algo/productizing-registration/), [family wedge](/moats/segment-wedges/)).
+
+## The cross-segment scoreboard
+
+| Pain theme | Scalper/F&O | Option seller | API trader | Investor | Beginner | MTF user | Commodity | Global | HNI/Family |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 1 · Reliability/stale prices | 🔴 | 🔴 | 🔴 | 🟡 | 🟡 | 🟡 | 🔴 | 🟡 | 🟡 |
+| 2 · Order behavior | 🔴 | 🔴 | 🔴 | 🟡 | 🟡 | 🟡 | 🔴 | — | 🟡 |
+| 3 · Hidden charges | 🟡 | 🔴 | 🟡 | 🔴 | 🔴 | 🔴 | 🟡 | 🔴 | 🟡 |
+| 4 · Withdrawal trust | 🟡 | 🟡 | 🟡 | 🔴 | 🟡 | 🟡 | 🟡 | 🔴 | 🔴 |
+| 5 · Support black hole | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🟡 | 🟡 | 🔴 | 🔴 |
+| 6 · API instability | 🟡 | 🟡 | 🔴 | — | — | — | 🔴 | — | 🟡 |
+| 7 · Holdings mismatch | 🟡 | 🟡 | 🟡 | 🔴 | 🟡 | 🟡 | — | 🔴 | 🔴 |
+| 8 · Spam/upsell | 🔴 | 🟡 | 🟡 | 🟡 | 🔴 | — | — | 🟡 | 🟡 |
+| 9 · Account lifecycle | — | — | 🟡 | 🟡 | 🔴 | — | — | 🔴 | 🟡 |
+| 10 · Quality regressions | 🔴 | 🟡 | 🔴 | 🟡 | 🟡 | — | 🟡 | 🟡 | — |
+
+🔴 = switch-trigger severity · 🟡 = trust-erosion severity · — = rarely surfaces for this segment
+
+**Two readings of this board:** support failure (5) and hidden charges (3) are the only pains that hit *every* segment at switch-trigger or near-trigger level — they are the universal wedge. Reliability (1) and order truth (2) are what the *revenue-core* segments churn over — they are the wedge for the users worth the most.
+
+<Aside type="tip" title="Standing listening infrastructure">
+This snapshot decays. The recommendation from [Wow Validation](/moats/wow-validation/) stands and now has a concrete shape: a monthly pass over (a) NSE Report 1C/1A/4B updates, (b) latest low-star reviews across the 15 tracked apps, (c) the three accessible broker communities, (d) press/X outage coverage — coded into these ten themes. Two gaps need tooling: authenticated Reddit API access and X API/Grok access; both are listed as follow-ups in `research/12`.
+</Aside>

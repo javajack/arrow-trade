@@ -14,6 +14,8 @@ const expectedRoutes = [
   'strategy/feature-parity-matrix',
   'strategy/validated-feature-ideas',
   'strategy/go-to-market',
+  'pain-signals/verified-pain-registry',
+  'pain-signals/pain-by-customer-type',
   'algo/regulatory-framework',
   'algo/platform-landscape',
   'algo/productizing-registration',

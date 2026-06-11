@@ -67,6 +67,13 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Pain Signals (Voice of the Market)',
+          items: [
+            { label: 'Verified Pain Registry', slug: 'pain-signals/verified-pain-registry' },
+            { label: 'Pain by Customer Type', slug: 'pain-signals/pain-by-customer-type' },
+          ],
+        },
+        {
           label: 'Algo Trading',
           items: [
             { label: 'Regulation — The Framework', slug: 'algo/regulatory-framework' },
