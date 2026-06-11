@@ -1,0 +1,173 @@
+# 09 - Validated Feature Ideas
+
+Research date: 2026-06-11. This backlog translates the six research files and parity matrix into concrete product, operations, trust, pricing and GTM ideas for Arrow Trade.
+
+Effort guess:
+
+- **S**: narrow build, mostly product/UI/docs/process.
+- **M**: cross-functional feature with backend, risk, operations or compliance dependencies.
+- **L**: complex platform/regulatory/infra feature or multi-quarter product.
+
+Differentiation:
+
+- **Parity**: required to be credible.
+- **Plus**: better implementation of known market feature.
+- **Leapfrog**: meaningful white-space or strategic differentiation.
+
+## Priority Backlog
+
+| Idea | Rationale grounded in research | Target segment | Differentiation | Effort |
+|---|---|---|---|---:|
+| Public all-in pricing page | Zerodha, Dhan and m.Stock win trust by publishing simple charges; hidden charges are a major churn source ([05-pricing-margin-mtf](05-pricing-margin-mtf.md), [Zerodha charges](https://zerodha.com/charges/)). | All users | Parity | S |
+| Rs 10/order F&O and intraday pricing | m.Stock/Kotak Neo make Rs 10 salient and create obvious savings vs Rs 20 brokers ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Active F&O, scalpers | Plus | M |
+| Rs 0 delivery and Rs 0 AMC | Free delivery and zero AMC are table stakes for retention and investor expansion ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Investors, dormant users | Parity | S |
+| True Cost Meter before order placement | Research identifies no broker owning live all-in cost, breakeven, statutory charges, funding and slippage together ([01-market-landscape](01-market-landscape.md), [05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Active traders, API users | Leapfrog | L |
+| Monthly true-cost statement | "Where your money went" ledger is white space across brokerage, taxes, DP, pledge, MTF and slippage ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Active traders, CAs | Leapfrog | M |
+| Shareable savings card | Active traders can quantify savings vs Rs 20 brokers, but no broker productizes a viral proof artifact ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Active traders | Leapfrog | S |
+| No-spam/no-RM/no-tips default policy | Dhan and Zerodha use no-spam/trader-respect as trust; pro users distrust sales-led advice ([06-support-trust-brand](06-support-trust-brand.md), [Dhan](https://dhan.co/)). | Pro traders, investors | Plus | S |
+| Severity-based pro support | Active F&O and API users need market-literate support tied to order IDs, timestamps and logs, not generic macros ([06-support-trust-brand](06-support-trust-brand.md)). | F&O, API users | Leapfrog | M |
+| Searchable support center with escalation links | Zerodha support exposes product help, tickets, SCORES/ODR and grievance paths ([06-support-trust-brand](06-support-trust-brand.md), [Zerodha Support](https://support.zerodha.com/)). | All users | Parity | M |
+| Ticket-to-order linkage | Traders judge support on whether responses understand order IDs, ledger lines and exchange timestamps ([06-support-trust-brand](06-support-trust-brand.md)). | Active traders | Leapfrog | M |
+| Public component status page | Fyers and Dhan expose status; outages still dominate trader perception ([03-trading-experience-fno-api](03-trading-experience-fno-api.md), [FYERS Status](https://status.fyers.in/)). | All users, API users | Plus | M |
+| Incident postmortems | No Indian broker owns Stripe/Cloudflare-style incident comms; market-open outages create lasting anger ([06-support-trust-brand](06-support-trust-brand.md)). | Active traders | Leapfrog | M |
+| User-specific incident impact view | Generic outage status does not answer whether a user's order/feed/login was affected ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Active traders, support | Leapfrog | L |
+| Complaint transparency dashboard | Complaint data is buried in compliance flows; research identifies complaint ratio as an open badge opportunity ([06-support-trust-brand](06-support-trust-brand.md)). | Trust-sensitive users | Leapfrog | M |
+| Custody proof dashboard | Karvy created durable fear about misuse of holdings; users need plain-language DP/pledge reconciliation ([06-support-trust-brand](06-support-trust-brand.md)). | Investors, HNIs, traders | Leapfrog | L |
+| 10-minute resident KYC | Dhan's less-than-10-minute account opening is the active-trader benchmark ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md), [Dhan](https://dhan.co/)). | New users | Parity | M |
+| Account readiness dashboard | Users confuse KYC completion with exchange/segment/DP/funds readiness; Dhan separates exchange approval in copy ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | New traders | Leapfrog | M |
+| F&O-first activation during onboarding | Traders need income proof and segment activation early, not after account opening ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | F&O users | Plus | M |
+| API-first onboarding | DhanHQ, Fyers, Upstox and Kite Connect place APIs near signup, but not full lifecycle ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Developers | Leapfrog | M |
+| PAN/Aadhaar/bank preflight | Mismatch is a known drop-off killer; current mitigation is often assisted callback ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | New users | Leapfrog | M |
+| Resume exact failed KYC step | Drop-off rescue is critical for Aadhaar/PAN/bank proof failures ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | New users | Plus | M |
+| NRI account path | Zerodha and bank brokers expose NRI paths; high-value users ask peers which broker works ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md), [Zerodha NRI](https://zerodha.com/open-account/nri/)). | NRIs | Parity | L |
+| HUF account path | Zerodha/Groww expose HUF; HUF wins wealthy families and tax stickiness ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Families, HNIs | Parity | L |
+| Minor account path | Zerodha and bank brokers support family onboarding ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Families | Parity | M |
+| First-trade checklist | Research recommends converting opened accounts into active accounts through F&O, funds, risk, API and watchlist steps ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | New active traders | Leapfrog | M |
+| UPI/netbanking/virtual-account pay-in | Instant or near-instant funds are baseline; large traders need bank transfer fallback ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | All users | Parity | L |
+| Funding limit explainer | UPI/bank/broker limits are often buried; users need remaining limits before payment ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Active traders | Leapfrog | M |
+| Payment trace IDs and reversal SLA | Payment success but delayed balance is common and poorly explained ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | All users | Leapfrog | M |
+| Margin shortfall rescue flow | Active traders need top-up amount tied to pending basket/position and deadline ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | F&O users | Leapfrog | M |
+| Instant payout matching Zerodha | Zerodha has the clearest public instant payout: 9 AM-4 PM all days including weekends, Rs 100-Rs 2 lakh, no charge ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md), [Zerodha instant payout](https://support.zerodha.com/category/funds/fund-withdrawal/withdrawal-process/articles/instant-fund-withdrawal)). | All users | Parity | L |
+| Live balance buckets | Settlement and withdrawable confusion drives support; users need cash, unsettled, collateral, margin and instant-withdrawable buckets ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Traders, investors | Leapfrog | L |
+| Payout failure autopilot | Research identifies failed withdrawal handling as an open trust feature ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | All users | Leapfrog | M |
+| Quarterly settlement preview | SEBI running account settlement surprises users; no broker owns proactive preview ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | All users | Leapfrog | M |
+| TradingView-grade chart trading | Dhan is the current best with multi-layout chart trading, drag/drop orders, baskets, option chain and live P&L ([03-trading-experience-fno-api](03-trading-experience-fno-api.md), [Dhan TradingView](https://dhan.co/tradingview/)). | Active traders | Parity | L |
+| Multi-chart persistent workspaces | Dhan/Fyers offer multi-chart/scalper layouts; pro users need persistent multi-monitor setups ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Pro traders | Plus | L |
+| Shareable layout templates | Research recommends community loops via shareable layouts and templates ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Pro traders, community | Leapfrog | M |
+| Command palette | Terminal requirements call for keyboard actions for symbols, orders, exits, baskets and rollovers ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Power users | Leapfrog | M |
+| Advanced option chain | Dhan/Fyers/m.Stock set baseline for Greeks, OI, volume and order placement ([03-trading-experience-fno-api](03-trading-experience-fno-api.md), [Dhan Options](https://dhan.co/options/)). | F&O traders | Parity | L |
+| Option chain API | DhanHQ and Upstox expose chain APIs; systematic options users need programmatic access ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | API users | Parity | M |
+| Greeks/OI/IV/PCR analytics | Dhan and Sensibull/Quantsapp show demand for strategy analytics ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Options traders | Plus | L |
+| Liquidity and exit-depth flags | Research recommends "can I exit?" warnings; no broker owns this clearly ([01-market-landscape](01-market-landscape.md), [03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Options traders | Leapfrog | L |
+| Strategy builder with live payoff | Sensibull/Zerodha, Dhan and Fyers validate demand; gap is native payoff inside execution flow ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Options traders | Leapfrog | L |
+| Rejected-leg scenario preview | Multi-leg options traders fear second-leg rejection and partial execution ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Options traders | Leapfrog | L |
+| Basket orders with real-time margin | Zerodha and Dhan validate basket + margin workflow ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Options traders | Parity | L |
+| GTT/forever orders | Zerodha's one-year GTT creates passive retention ([03-trading-experience-fno-api](03-trading-experience-fno-api.md), [Zerodha GTT](https://support.zerodha.com/category/trading-and-markets/charts-and-orders/gtt/articles/what-is-the-good-till-triggered-gtt-feature)). | Investors, swing traders | Parity | M |
+| Iceberg/slicing | Zerodha and Dhan solve freeze-limit/manual splitting pain ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | High-quantity traders | Parity | M |
+| Bracket/cover orders with trailing exits | Dhan/Fyers/Angel validate risk-defined intraday orders ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Intraday traders | Plus | M |
+| One-click scalping mode | Fyers Quick Trade, Dhan Flash Trade and m.Stock Watchlist PRO validate speed workflows ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Scalpers | Plus | M |
+| Emergency flatten/reverse/hedge | Research identifies fast flatten, reverse, add hedge and convert-to-basket as terminal requirements ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | F&O traders | Leapfrog | M |
+| Expiry Mode | Expiry-day pain is amplified by SEBI curbs, larger lots, fewer weekly expiries and margin tightening ([01-market-landscape](01-market-landscape.md), [03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | F&O traders | Leapfrog | L |
+| Rollover wizard | Research identifies rollover tooling as underdeveloped across brokers ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | F&O swing/positional | Leapfrog | L |
+| MCX cockpit | Dhan treats commodity as first-class; commodity traders need night-session and delivery-risk UX ([03-trading-experience-fno-api](03-trading-experience-fno-api.md), [Dhan commodity](https://dhan.co/commodity/)). | Commodity traders | Plus | L |
+| Latency Ledger | Fyers/Dhan make speed claims, but user-visible proof is rare ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | API users, active traders | Leapfrog | L |
+| Deterministic order-state machine | API users suffer when order/error semantics are ambiguous; research calls for idempotency and audit logs ([01-market-landscape](01-market-landscape.md)). | API users | Leapfrog | L |
+| Idempotency keys for APIs | Prevent duplicate orders/retries; part of complete developer platform gap ([01-market-landscape](01-market-landscape.md)). | Algo/API users | Leapfrog | M |
+| WebSocket sequence numbers and replay | Current WebSockets exist, but serious users need gap detection and reconciliation ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | API users | Leapfrog | L |
+| Free personal API tier | DhanHQ/Fyers/Shoonya normalize free API; Zerodha charges for Connect features ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Developers | Parity | M |
+| API pro tier with endpoint SLOs | Paid tier should add audited value: higher limits, SLA, deeper history, priority incident channel ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Pro/API users | Plus | M |
+| OpenAPI spec and SDKs | Zerodha/Fyers/Dhan validate multi-language SDKs ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Developers | Parity | M |
+| Realistic sandbox | Current APIs do not fully simulate rejects, RMS, freeze limits, holidays and partial fills ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Developers | Leapfrog | L |
+| Paper trading tied to live data | Broker-grade simulation with realistic RMS is a market gap ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | New traders, API users | Leapfrog | L |
+| Backtest-paper-live promotion | Users want strategy lifecycle rather than separate tools ([01-market-landscape](01-market-landscape.md)). | Algo users | Leapfrog | L |
+| Server-side strategy risk limits | Client bots fail; broker-enforced limits improve safety ([01-market-landscape](01-market-landscape.md)). | Algo users, risk team | Leapfrog | L |
+| API endpoint uptime dashboard | API ops transparency is thin across brokers ([06-support-trust-brand](06-support-trust-brand.md)). | Developers | Leapfrog | M |
+| Developer changelog and deprecation policy | Serious API users need versioning and change visibility ([06-support-trust-brand](06-support-trust-brand.md)). | Developers | Plus | S |
+| MTF at 9.49%-9.99% p.a. | m.Stock and Kotak define low-rate MTF expectations ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Delivery leverage users | Plus | L |
+| First-use MTF trial | Angel's 0% first 30 days up to Rs 1 lakh creates activation psychology ([05-pricing-margin-mtf](05-pricing-margin-mtf.md), [Angel One MTF](https://www.angelone.in/margin-trading-facility)). | Investors, traders | Plus | M |
+| MTF interest rupees/day meter | Research identifies rate disclosures as insufficient; users need controllable cost ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | MTF users | Leapfrog | M |
+| MTF repay/partial repay/convert controls | Funding should be manageable from the position screen ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | MTF users | Leapfrog | M |
+| Public eligible MTF universe with risk labels | Dhan/m.Stock large universes validate demand; users need haircuts and concentration caps ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | MTF users | Plus | M |
+| Instant pledge | Dhan, Angel, m.Stock and Zerodha validate pledge convenience ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Option sellers, investors | Parity | L |
+| Always-visible collateral split | Cash/cash-equivalent/non-cash/blocked/usable margin confusion is a major trader pain ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Option sellers | Leapfrog | L |
+| Haircut and usable-margin preview | Haircut surprises cause order rejects; margin calculator must match live behavior ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | F&O, pledge users | Plus | M |
+| Margin shortfall forecast | Research recommends forecasting shortfalls before end of day ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | F&O, MTF users | Leapfrog | M |
+| Collateral against liquid ETFs/G-Secs/T-bills | Sophisticated traders need cash-equivalent collateral; bank/wealth brokers have an advantage ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Option sellers, HNIs | Plus | L |
+| Smart Cash assistant | Brokers cannot simply pay idle cash interest; research recommends liquid ETF/fund/T-bill suggestions with risk labels ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Investors, traders | Leapfrog | L |
+| Capital efficiency score | No broker provides one score for cash, collateral, leverage and funding cost ([05-pricing-margin-mtf](05-pricing-margin-mtf.md)). | Pro traders | Leapfrog | M |
+| Named back office console | Zerodha Console proves reports can be a product brand ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md), [Console](https://console.zerodha.com/)). | All users | Plus | M |
+| Tax P&L | Zerodha Tax P&L is the benchmark and CA-friendly ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Investors, traders | Parity | M |
+| CA Packet 2.0 | Heavy F&O users need F&O turnover, charges, ledger, contract notes and assumptions in one shareable packet ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md), [04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | F&O users, CAs | Leapfrog | L |
+| Report APIs | API-first users want ledger, reports, tax, holdings and corporate actions programmatically ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Developers, pro users | Leapfrog | M |
+| Strategy-level P&L | Research identifies strategy-level net P&L after charges/taxes as a key whitespace ([01-market-landscape](01-market-landscape.md)). | Serious traders | Leapfrog | L |
+| Auto trade journal | Current reports are not trader-journal native; opportunity exists across Dhan/Fyers/Zerodha ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md)). | Active traders | Leapfrog | L |
+| Order replay and screenshots | Research recommends automatic screenshots, order replay and slippage attribution ([01-market-landscape](01-market-landscape.md)). | Active traders, support | Leapfrog | L |
+| Rule-violation detection | Post-trade journal should detect setup/risk rule violations ([01-market-landscape](01-market-landscape.md)). | Disciplined traders | Leapfrog | M |
+| Slippage attribution | True performance requires slippage attribution by instrument/strategy/order type ([01-market-landscape](01-market-landscape.md)). | Pro traders | Leapfrog | M |
+| Family portfolio | Zerodha and INDmoney validate family views; bank brokers own household relationships ([02-onboarding-money-backoffice](02-onboarding-money-backoffice.md), [04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Families, HNIs | Plus | L |
+| Nominee and inheritance checklist | Research recommends family workspace with nominees, inheritance and document vault ([01-market-landscape](01-market-landscape.md)). | Long-term investors | Leapfrog | M |
+| External portfolio import | INDmoney proves aggregation can create habit before assets transfer ([04-investor-research-ecosystem](04-investor-research-ecosystem.md), [INDmoney](https://www.indmoney.com/)). | Investors | Plus | L |
+| Portfolio Intelligence Console | Combines INDmoney, Zerodha Console and Tickertape strengths into one dashboard ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, traders | Leapfrog | L |
+| Unified stock page | Tickertape/Groww/INDmoney validate stock pages; Arrow can add holdings, F&O and hedge context ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors | Plus | L |
+| Stock screener | Tickertape's screener and Groww/INDmoney screens validate discovery demand ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, systematic users | Parity | L |
+| Screen-to-basket-to-SIP | Research identifies this as a high-value bridge between screeners and systematic investing ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, systematic users | Leapfrog | L |
+| Watchlist intelligence | Watchlists should include valuation, events, earnings, F&O liquidity, notes and screen membership ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, traders | Plus | M |
+| Research scorecard | ICICI/HDFC/Angel validate research demand; no broker makes misses and drawdowns transparent enough ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors | Leapfrog | L |
+| Direct mutual funds | Groww, Zerodha Coin, INDmoney, Dhan and HDFC validate direct MF/SIP demand ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors | Parity | L |
+| ETF analytics | Groww/HDFC/INDmoney validate ETFs; liquidity/tracking/premium-discount analytics can improve experience ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors | Plus | M |
+| IPO mandate tracker | Zerodha/Dhan/Groww/Upstox validate IPO dashboards; mandate state clarity is a pain point ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors | Plus | M |
+| Fixed-income cockpit | ICICI/Angel/Groww validate bonds/G-Secs/SGB; users need YTM, credit, liquidity and coupon clarity ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | HNIs, retirees | Plus | L |
+| Dividend and cashflow calendar | Groww/HDFC/Tickertape/INDmoney validate event tracking and income screenshots ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors | Plus | M |
+| Portfolio risk analytics | Current brokers show partial pieces; few make risk personal ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, advisors | Leapfrog | L |
+| Tax harvesting preview | Zerodha/Quicko ecosystem validates tax workflow; research recommends harvest candidates and ITR exports ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, CAs | Plus | L |
+| Goal planning | Groww/INDmoney/bank brokers validate goals; should come after analytics correctness ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Long-term investors | Parity | M |
+| Education curriculum | Zerodha Varsity is free, open, ad-free and shareable ([04-investor-research-ecosystem](04-investor-research-ecosystem.md), [Varsity](https://zerodha.com/varsity/)). | Beginners, traders | Parity | L |
+| Contextual education from user risk | Research recommends lessons tied to actual holdings, F&O losses and SIP gaps ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, traders | Leapfrog | M |
+| Public product/community forum | Zerodha TradingQ&A and Dhan MadeForTrade validate public community and support loops ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Traders, developers | Plus | M |
+| Regional pro education | Research identifies a gap for non-hype regional risk/API/order education ([06-support-trust-brand](06-support-trust-brand.md)). | Tier-2/3 serious users | Leapfrog | M |
+| Verified educator program | Creator distribution works, but compliance risk is high; research recommends review and affiliate labeling ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Community, creators | Plus | M |
+| Public changelog | Dhan-style product loops and API trust require visible shipping evidence ([06-support-trust-brand](06-support-trust-brand.md)). | Pro users, developers | Plus | S |
+| Expiry-day war-room updates | Reliability and expiry-day risk are core trust issues; no broker owns proactive expiry comms ([03-trading-experience-fno-api](03-trading-experience-fno-api.md), [06-support-trust-brand](06-support-trust-brand.md)). | F&O traders | Leapfrog | M |
+| Broker-side kill switch clarity | Research recommends kill switch and order health center for incidents ([03-trading-experience-fno-api](03-trading-experience-fno-api.md)). | Active traders, API users | Leapfrog | M |
+| Opt-in premium support/dealer help | Full-service brokers retain with human help; pro users dislike unsolicited RMs ([06-support-trust-brand](06-support-trust-brand.md)). | HNIs, pro desks | Plus | M |
+| Multi-account/family/pro desk mode | Research identifies structured multi-account retail desks as whitespace ([01-market-landscape](01-market-landscape.md)). | Pro desks, families | Leapfrog | L |
+| Partner OAuth and app marketplace | Zerodha ecosystem proves partner flywheel; Arrow can add regulated scopes and review ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Developers, partners | Leapfrog | L |
+| Tax/accounting partner integrations | Zerodha + Quicko validates tax ecosystem; Arrow can expose report APIs and CA links ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | CAs, heavy traders | Plus | M |
+| Smallcase-like basket infrastructure | smallcase validates themed portfolios and rebalances; Dhan/Angel/Zerodha integrate ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors, creators | Plus | L |
+| Compliance-safe model portfolios | Angel/ICICI/smallcase validate advisory demand, but transparency is required ([04-investor-research-ecosystem](04-investor-research-ecosystem.md)). | Investors | Plus | L |
+
+## Phase Cut
+
+| Phase | Include these ideas |
+|---|---|
+| Phase 1 launch | Public pricing, Rs 10/order, no-spam policy, support center, status page, KYC, readiness dashboard, F&O activation, pay-in/out, chart trading, option chain, baskets, GTT, slicing, True Cost Meter, free API, SDKs, sandbox v1, Latency Ledger v1, named console, Tax P&L, CA packet v1 |
+| Phase 1 fast-follow | Expiry Mode, paper trading, payment trace automation, payout autopilot, complaint dashboard, strategy journal, order replay, MTF meter, instant pledge refinements, shareable savings card, API endpoint uptime |
+| Phase 2 | MF/ETF/IPO/bonds, Portfolio Intelligence Console, family workspace, external imports, stock pages, screeners, research scorecard, dividend calendar, tax harvesting, contextual education |
+| Phase 3 | Partner OAuth marketplace, strategy lifecycle, multi-account pro desk, advanced collateral, Smart Cash, model portfolios and ecosystem revenue share |
+
+## Non-Product Experience Ideas
+
+| Idea | Rationale | Segment | Differentiation | Effort |
+|---|---|---|---|---:|
+| Public reliability SLOs | Current broker reliability claims are uneven; serious users need p95/p99 latency, uptime and update-time promises. | F&O, API | Leapfrog | M |
+| Pre-written incident playbooks | First major outage defines the brand; support/comms must be ready before launch. | All users | Leapfrog | S |
+| Compensation policy | Transparent incident compensation reduces ambiguity and anger. | Active traders | Leapfrog | M |
+| Monthly trust report | Combine uptime, incidents, complaints, support SLAs, custody reconciliation and API uptime. | All users | Leapfrog | M |
+| Risk-first content policy | Avoid hype, P&L bait and guaranteed-return language; aligns with SEBI risk backdrop. | Community | Plus | S |
+| Compliance review for all creator/affiliate content | Influencer and advice-led acquisition carries mis-selling risk. | GTM | Plus | M |
+| CA outreach program | Tax packet and F&O turnover reports create CA-driven referrals. | Heavy F&O, investors | Plus | S |
+| Design partner council | Serious traders and API users should shape workflows before public launch. | Pro users | Plus | S |
+| Public roadmap with closed-loop feature requests | Dhan/TradingQ&A loops show community value; closure builds trust. | Community | Plus | M |
+| Regional support and education roster | Tier-2/3 pro traders need risk/order/API education in local languages. | Regional traders | Leapfrog | M |
+
+## Ideas to Defer or Avoid
+
+| Idea | Decision | Reason |
+|---|---|---|
+| Broad celebrity-led mass marketing at launch | Avoid | High CAC and low-intent accounts; does not build serious-trader credibility. |
+| Forced RM/advisory calls | Avoid | Contradicts no-spam pro trust wedge. |
+| Tips/signals/P&L-led community | Avoid | Regulatory and trust risk; attracts wrong cohort. |
+| Insurance/loans in early app | Defer | Contaminates trust before core broker credibility is established. |
+| Full-service research before scorecard infrastructure | Defer | Research without transparent performance/conflicts looks like advice churn. |
+| Global investing at launch | Defer | Not needed for F&O/API wedge; adds tax and partner complexity. |
+| Large MTF book before risk maturity | Defer/limit | MTF is attractive but credit/risk-heavy. Launch capped and instrumented. |

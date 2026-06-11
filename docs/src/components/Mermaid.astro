@@ -1,0 +1,47 @@
+---
+const { chart, title } = Astro.props;
+const id = `mermaid-${Math.random().toString(36).slice(2)}`;
+---
+
+<figure class="mermaid-frame" aria-label={title}>
+  {title && <figcaption>{title}</figcaption>}
+  <pre id={id} class="mermaid-source" data-chart={encodeURIComponent(chart)}></pre>
+</figure>
+
+<script>
+  import mermaid from 'mermaid';
+
+  const renderMermaid = async () => {
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default',
+      themeVariables: { fontFamily: 'Inter, system-ui, sans-serif' },
+    });
+
+    for (const node of document.querySelectorAll('.mermaid-source[data-chart]')) {
+      const source = decodeURIComponent(node.getAttribute('data-chart') || '');
+      const id = node.id || `mermaid-${Math.random().toString(36).slice(2)}`;
+      try {
+        const { svg } = await mermaid.render(`${id}-svg`, source);
+        const wrap = document.createElement('div');
+        wrap.className = 'mermaid-rendered';
+        wrap.innerHTML = svg;
+        node.replaceWith(wrap);
+        const el = wrap.querySelector('svg');
+        const vb = el?.viewBox?.baseVal;
+        if (el && vb?.width && vb.width > wrap.clientWidth) {
+          el.style.minWidth = `${Math.min(vb.width, 1400)}px`;
+        }
+      } catch (err) {
+        console.error('Mermaid render failed:', err);
+        node.classList.add('mermaid-error');
+        node.removeAttribute('data-chart');
+        node.textContent = source;
+      }
+    }
+  };
+
+  document.addEventListener('astro:page-load', renderMermaid);
+  renderMermaid();
+</script>

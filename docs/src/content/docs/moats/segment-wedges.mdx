@@ -1,0 +1,164 @@
+---
+title: "Segment Wedges"
+description: "Every user segment in Indian broking — their sharpest pain, the experience that wins them, the wow moment, and the word-of-mouth loop — in one app without dilution."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+import Mermaid from '../../../components/Mermaid.astro';
+
+The go-to-market wedge is F&O + API-first ([GTM](/strategy/go-to-market/)), but the ambition is broader: **serve every segment well, with experience — not just trading features — as the differentiator**. This page maps all the segments, what currently owns each, where the experience actually breaks for them today, and what Arrow's winning version looks like.
+
+<Aside type="tip" title="The core architectural decision">
+All segments live in **one app with two registers**: a dense, keyboard-fast **Pro mode** and a calm, low-cognitive-load **Invest mode**, sharing one ledger, one trust layer, one support system and one back office. Groww proves simplicity wins beginners; Dhan proves density wins traders; nobody has shipped both registers on one account without compromising either ([landscape](/market-landscape/)). The mode is a presentation choice, never a feature wall — an investor can open the option chain; a trader can see their SIPs.
+</Aside>
+
+## Segment map
+
+<Mermaid title="Segment expansion sequence — credibility flows outward from the wedge" chart={`flowchart LR
+    subgraph P1["Phase 1 — wedge"]
+      A["F&O discretionary\ntraders"]
+      B["Option sellers"]
+      C["Algo / API\ndevelopers"]
+      D["Commodity (MCX)\ntraders"]
+    end
+    subgraph P2["Phase 2 — expansion"]
+      E["Long-term DIY\ninvestors"]
+      F["Families · HUF\nHNI · minors"]
+      G["First-time\ninvestors"]
+    end
+    subgraph P3["Phase 2/3 — reach"]
+      H["NRIs"]
+      I["Tier-2/3\nvernacular users"]
+      J["CAs & tax pros\n(channel)"]
+    end
+    A --> E
+    B --> F
+    C --> J
+    A --> G
+    E --> H
+    G --> I
+`} />
+
+## Phase 1 wedge segments
+
+### 1. Active F&O discretionary traders
+
+The revenue core of Indian retail broking and its most regulator-pressured segment: 91% of individual F&O traders lost money in FY25, and SEBI's curbs cut unique derivatives traders 20% YoY ([ET on SEBI study](https://economictimes.indiatimes.com/markets/stocks/news/91-of-individual-fo-traders-lost-money-in-fy25-despite-sebi-curbs-study/articleshow/122302956.cms)).
+
+| | |
+|---|---|
+| **Best served today by** | Dhan (chart trading, Flash Trade, option cockpit), Zerodha (trust, GTT, baskets), Fyers (scalper terminal, 50-depth) |
+| **Sharpest unsolved pains** | Margin surprises on multi-leg entries; rejected second legs; expiry-day chaos; outage silence during open positions; no strategy-level P&L after charges; tax-season archaeology |
+| **Arrow's winning experience** | The full pipeline as one system: chain → basket with margin preview → rejected-leg simulation → true cost → journal tag → strategy P&L → CA packet. Expiry Mode as the flagship ("Built for Thursday") |
+| **Wow moment** | First time the platform *predicts* a margin rejection before submission and explains exactly why — instead of failing at the exchange |
+| **WOM loop** | Savings cards (₹10 vs ₹20 proof), Expiry Mode screen recordings, "they showed me where my order spent time" stories |
+| **Retention hook** | Journal and strategy history — the trader's own memory lives here (moat #2) |
+
+### 2. Option sellers (the capital-efficiency segment)
+
+A distinct segment from buyers: higher capital, longer horizon, obsessed with margin utilization and collateral, the most profitable durable cohort in the category.
+
+| | |
+|---|---|
+| **Best served today by** | Zerodha (pledge maturity), Dhan (pledge workflow), m.Stock (87.5% collateral marketing), bank brokers (collateral against MF/bonds) |
+| **Sharpest unsolved pains** | Cash/non-cash collateral confusion (the 50:50 rule); haircut surprises; pledge state opacity; margin shortfall discovered at penalty time, not before |
+| **Arrow's winning experience** | Collateral as a first-class balance: four numbers always visible (cash / cash-equivalent / non-cash / usable), instant pledge with visible haircut, end-of-day shortfall *forecast*, collateral against liquid ETFs and G-Secs in Phase 2 ([pricing research](/experience/pricing-margin-mtf/)) |
+| **Wow moment** | "Margin shortfall forecast: you will be ₹43,000 short at EOD if NIFTY stays here — pledge X or top up by 3:15 PM" |
+| **WOM loop** | Sellers run in tight communities (Telegram/Twitter option-selling circles) where capital-efficiency tricks travel fast |
+| **Retention hook** | Pledged holdings physically reside with Arrow's DP — asset gravity (moat #4) |
+
+### 3. Algo and API developers / small pro desks
+
+Small in count, enormous in influence: developers produce the public artifacts (repos, videos, threads) that acquire everyone else.
+
+| | |
+|---|---|
+| **Best served today by** | Kite Connect (maturity, SDKs, ₹500/mo), DhanHQ (free, option-chain API), Fyers (free, 7ms claim), Upstox (clear SEBI-category rate limits) |
+| **Sharpest unsolved pains** | No realistic sandbox (RMS rejects, partial fills, freeze limits); ambiguous order-state/error semantics; silent throttling; no endpoint uptime; WebSocket gaps unreconcilable; reports not API-accessible |
+| **Arrow's winning experience** | The complete lifecycle: sandbox → paper on live data → one-click live promotion with server-side risk limits → reconciliation via sequence-numbered streams → report APIs for journal/tax ([API gap analysis](/experience/trading-experience-fno-api/)) |
+| **Wow moment** | First sandbox order that gets *realistically rejected* with the exact RMS reason — "this is what production will actually do" |
+| **WOM loop** | Working code is the referral: examples, SDKs and Postman collections get forked, starred and demoed on YouTube |
+| **Retention hook** | Integrations are infrastructure — once a desk's tooling is wired to Arrow's order-state machine and webhooks, migration is a project, not a click |
+
+### 4. Commodity (MCX) traders
+
+Chronically underserved by equity-first apps; concentrated, loyal communities.
+
+| | |
+|---|---|
+| **Best served today by** | Dhan (commodity dashboard, pledge margin), Zerodha (MCX membership + Kite stability), Shoonya (cost) |
+| **Sharpest unsolved pains** | Evening-session reliability ignored by equity-first ops; physical-delivery risk discovered too late; margin calendars and circuit behavior opaque |
+| **Arrow's winning experience** | MCX cockpit: night-session status, near/far spread view, delivery-risk countdown guardrails, commodity margin calendar ([trading research](/experience/trading-experience-fno-api/)) |
+| **Wow moment** | "Do not carry into delivery period" warning with the exact date and consequence, weeks ahead |
+| **WOM loop** | "Finally a broker that understands MCX" travels fast in small, dense commodity communities |
+| **Retention hook** | If launch-day MCX membership is not feasible, publish the roadmap honestly — this segment rewards candor and punishes surprise |
+
+## Phase 2 expansion segments
+
+### 5. Long-term DIY investors
+
+| | |
+|---|---|
+| **Best served today by** | Zerodha (Console, Coin, free delivery), Groww (simplicity), Tickertape/smallcase (research/baskets), INDmoney (aggregation) |
+| **Sharpest unsolved pains** | Performance truth (XIRR vs benchmark vs cash drag) scattered across tools; corporate actions unexplained; tax harvesting manual; risk concentration invisible until it hurts |
+| **Arrow's winning experience** | Portfolio Intelligence Console — one tax-aware dashboard across equity, MF, ETF, bonds and dividends with benchmark attribution; screen → watchlist → basket → SIP as one workflow ([ecosystem research](/experience/investor-research-ecosystem/)) |
+| **Wow moment** | "Your portfolio returned 14.2% XIRR vs Nifty's 11.8%, but cash drag cost you 1.9%" — performance truth nobody else states plainly |
+| **WOM loop** | Portfolio-health and dividend-income screenshots; "my CA accepted the report in one go" |
+| **Retention hook** | Tax history and external-portfolio imports — the longer the history, the better the insights, the harder the exit |
+
+### 6. Families, HUFs, HNIs and minors
+
+| | |
+|---|---|
+| **Best served today by** | Bank brokers (household relationships, RMs), Zerodha (family portfolio, HUF/minor paths), INDmoney (family net-worth view) |
+| **Sharpest unsolved pains** | Multi-account coordination is manual; HUF/minor opening is paperwork-heavy everywhere; inheritance/nominee hygiene is nobody's product; consolidated household tax view doesn't exist |
+| **Arrow's winning experience** | Permissioned family workspace: HUF/minor/NRI labels, nominee completion status, document vault, consolidated reporting with privacy controls — bank-grade reassurance without bank-broker density ([parity matrix §1](/strategy/feature-parity-matrix/)) |
+| **Wow moment** | One screen showing the whole household's positions, nominee gaps and combined tax preview — with each member's privacy intact |
+| **WOM loop** | The family champion (usually the Phase-1 trader) recruits the household; CAs recommend the consolidated reporting |
+| **Retention hook** | Households churn at a fraction of individual rates — switching means coordinating people, paperwork and tax years (moat #4) |
+
+### 7. First-time investors
+
+Deliberately *not* the acquisition wedge — Groww owns that war and it's expensive. But Phase-1 users have spouses, siblings and friends who ask "which app should I start with?"
+
+| | |
+|---|---|
+| **Best served today by** | Groww (4.8 Play / 4.6 iOS with 170k reviews — anxiety-free onboarding as a product), Paytm Money (familiarity) |
+| **Sharpest unsolved pains** | Graduation cliff: the moment a Groww user gets serious, they must *switch brokers* to get depth — losing history and re-doing KYC |
+| **Arrow's winning experience** | Invest mode is genuinely calm (not a stripped-down trader UI), but the ceiling is infinite: the same account grows into screeners, options hedging and APIs with zero migration. Education unlocks contextually from real holdings rather than generic content |
+| **Wow moment** | Realizing the "simple" app they started on is the same one their trader friend uses — no graduation cliff exists |
+| **WOM loop** | Trader-to-family referrals ("start here, you won't outgrow it") — inverting Groww's beginner-to-trader churn path |
+| **Retention hook** | They never hit the switch-or-stagnate decision every Groww power user eventually faces |
+
+## Reach segments
+
+### 8. NRIs
+
+High-value, badly served, referral-dense. Zerodha exposes NRI as a first-class path; bank brokers win on relationship comfort ([onboarding research](/experience/onboarding-money-backoffice/)). The pains are structural: PIS/non-PIS confusion, F&O restrictions, tax treaties, fund-repatriation opacity. Arrow's play is a **fast-follow, operations-ready NRI path** with explicit status states and honest "what NRIs cannot do" documentation — candor is rare in this segment and NRI communities (country-specific WhatsApp/Reddit groups) reward the one broker that "actually works" with outsized referrals. Defer until operations can honor the promise; a broken NRI experience is worse than a waitlist.
+
+### 9. Tier-2/3 and vernacular users
+
+The structural growth frontier — even Nithin Kamath publicly asked why smaller cities were "swiping left" on Zerodha ([ET](https://economictimes.indiatimes.com/news/new-updates/zerodhas-next-growth-challenge-why-are-tier-2-and-3-investors-swiping-left-on-zerodha-asks-nithin-kamath/articleshow/122958508.cms)). Incumbent regional content is acquisition-skewed and beginner-baited (Groww/Angel). The open position is **regional-language *risk-first* education**: Hindi/Tamil/Telugu/Kannada/Marathi explainers on order mechanics, F&O risk, margin and APIs that tell people *not* to trade what they don't understand ([brand research](/experience/support-trust-brand/)). This is a Phase 1/2 content investment that compounds (moat #7) and pre-positions trust for the demographic wave, without requiring product changes beyond localization discipline.
+
+### 10. CAs and tax professionals (the channel segment)
+
+Not end users — multipliers. Every heavy F&O trader has a CA; every CA has dozens of trader clients. Zerodha Console's Tax P&L is already CA shorthand ("download it from Console") ([back-office research](/experience/onboarding-money-backoffice/)). Arrow's play: **CA Packet 2.0** (one shareable link: capital gains, F&O turnover, ledger, contract notes, assumptions), report APIs so CA tooling can integrate, and a tax-season outreach program. A CA who says "move to Arrow, their reports don't waste my time" converts entire client books at zero CAC.
+
+## Cross-segment experience guarantees
+
+What makes this *one platform* rather than ten products is a set of guarantees every segment gets identically — these are the "overall experience" backbone the user asked every segment to be measured on:
+
+| Guarantee | Standard | Who proved it matters |
+|---|---|---|
+| Money out | Instant withdrawal incl. weekends, published terms | Zerodha's weekend instant payout is the single strongest money-trust story found ([support doc](https://support.zerodha.com/category/funds/fund-withdrawal/withdrawal-process/articles/instant-fund-withdrawal)) |
+| Money in | UPI free, instant reflection, limits visible *before* paying | Dhan/m.Stock zero-gateway norms |
+| Order truth | Every order has a visible state timeline and exact reject reason | White space — no incumbent owns it |
+| Cost truth | All-in cost before the trade, monthly statement after | White space |
+| Support | No sales calls ever; severity-based SLA; tickets linked to order IDs | Dhan's no-spam promise + the gap in market-literate support |
+| Incidents | Public status, personal impact view, postmortem | Fyers/Dhan have status pages; nobody has the rest |
+| Statements | CA-ready, API-accessible, named back office | Zerodha Console |
+| Identity | KYC once, every account type (resident → HUF → minor → NRI) from one surface | Zerodha's account-type breadth |
+
+<Aside type="note" title="The strategic claim, in one sentence">
+Incumbents each own one segment's experience and tax the user with a switching decision when their needs grow; Arrow's wedge is the **absence of the graduation cliff** — one account whose experience is best-in-class at every stage of an investing life.
+</Aside>

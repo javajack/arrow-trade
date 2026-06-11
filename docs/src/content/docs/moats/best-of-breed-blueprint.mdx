@@ -1,0 +1,89 @@
+---
+title: "Best-of-Breed Blueprint"
+description: "The composite app: which broker to lift each experience from, how to exceed it, and why the moat lives in the seams between them."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+This is the assembly manual: for every stage of the user journey, the broker that does it best today, exactly what to lift, and the *plus* that makes Arrow's version better rather than merely equal. The evidence for each cell is in the five experience-research pages; this page is the decision.
+
+<Aside type="note" title="The integration thesis">
+Read the table below and notice that **no broker appears in more than three rows**. Every incumbent wins a slice and is mediocre across the rest — which means today's serious user runs Zerodha for trust + Dhan for charts + Sensibull for strategies + m.Stock economics envy + Excel for journaling + Console for tax. The composite is not a feature list; it is the **removal of the seams** between best-in-class slices. That pipeline — chain → margin → cost → execution → journal → tax — is the product no one owns, and integrated pipelines are far harder to copy than any single slice.
+</Aside>
+
+## The lift-and-exceed table
+
+| Journey stage | Lift from | What exactly to lift | Arrow's "plus" — how to exceed it |
+|---|---|---|---|
+| **Account opening** | Dhan | Sub-10-minute application; trader-segment intent captured upfront ([Dhan](https://dhan.co/)) | Honest readiness states (KYC done ≠ ready to trade): exchange, DP, segment, funds and API-key status shown separately; PAN/Aadhaar/bank preflight *before* the user invests ten minutes |
+| **Account types** | Zerodha | Resident, NRI, minor, HUF as first-class visible paths ([Zerodha](https://zerodha.com/open-account/)) | All paths from one surface with the family workspace as destination, not an afterthought |
+| **Developer onboarding** | DhanHQ + Kite Connect | Free API near signup; decade-tested docs culture ([DhanHQ](https://dhanhq.co/), [Kite Connect](https://kite.trade/)) | Sandbox key issued *during* KYC wait time — first paper order before the account is even approved |
+| **Pay-in** | Dhan / m.Stock | ₹0 UPI gateway, instant reflection ([pricing research](/experience/pricing-margin-mtf/)) | Limits (broker/UPI/bank/remaining-today) shown before payment; trace ID + reversal SLA on every transaction; margin-shortfall rescue linked to pending baskets |
+| **Withdrawal** | Zerodha | Weekend instant payout with published, concrete terms: 9 AM–4 PM all days, ₹100–₹2L, free ([support doc](https://support.zerodha.com/category/funds/fund-withdrawal/withdrawal-process/articles/instant-fund-withdrawal)) | Payout-failure autopilot (auto-fallback to regular payout with ETA) and quarterly-settlement preview — turn the two known failure moments into trust moments |
+| **Charting & terminal** | Dhan + Fyers | TradingView chart trading, 20+ layouts, drag-drop orders, chain-from-chart, live P&L on chart; Fyers' scalper density and 50-depth ([trading research](/experience/trading-experience-fno-api/)) | Cloud-synced workspaces, keyboard command palette, charge-and-slippage-adjusted P&L overlay, shareable layout templates |
+| **Order types** | Zerodha | GTT (1-year validity, OCO), Iceberg (50 legs), baskets with real-time margin ([Zerodha Kite](https://zerodha.com/products/kite/)) | Rejected-leg scenario preview before multi-leg submission; pre-submit RMS reject prediction with exact reason |
+| **Options cockpit** | Dhan + Sensibull | Chain with Greeks/OI/IV, Flash Trade strike discovery; Sensibull-class payoff and strategy building ([Dhan Options](https://dhan.co/options/)) | Native payoff *inside* the execution flow (no copy-strikes-to-another-tab), exit-one-leg simulation, "can I exit?" depth warnings, Expiry Mode cockpit |
+| **Commodity** | Dhan + Zerodha | Commodity-as-first-class dashboard; MCX membership + stability ([Dhan commodity](https://dhan.co/commodity/)) | Night-session ops status, delivery-risk countdown, spread view, margin calendar |
+| **Speed claims** | Fyers | The 7 ms order-placement marketing instinct ([FYERS API](https://fyers.in/products/api)) | Don't claim — *prove*: per-order Latency Ledger with client/broker/OMS/exchange timestamps, downloadable |
+| **Pricing** | m.Stock + Kotak Neo | ₹10/order F&O; ₹0 API-order pricing concept; ₹0 AMC ([m.Stock pricing](https://www.mstock.com/pricing), [Kotak Neo pricing](https://www.kotakneo.com/pricing/)) | The True Cost Meter: all-in pre-trade cost incl. statutory charges, DP, funding and slippage estimate — and a monthly "where your money went" statement. Cheapest *and provably so* |
+| **MTF** | m.Stock + Angel One | Sub-10% headline rate (8.99%); Angel's 0%-first-30-days activation psychology ([pricing research](/experience/pricing-margin-mtf/)) | Interest shown in ₹/day before order placement; one-tap repay / partial repay / convert-to-delivery; published universe with haircuts and concentration caps |
+| **Pledge & collateral** | Dhan + Angel + Zerodha | Instant pledge in minutes via OTP; mature haircut handling | Always-visible four-way balance (cash / cash-equivalent / non-cash / usable); EOD margin-shortfall forecast |
+| **Back office & tax** | Zerodha Console | A *named*, recognizable back-office product; Tax P&L that CAs accept ([Console](https://console.zerodha.com/)) | CA Packet 2.0 (one shareable link), strategy-level P&L after all charges, report APIs equal to trading APIs |
+| **Portfolio intelligence** | INDmoney + Tickertape | Cross-asset net-worth aggregation; clean stock pages and screeners ([ecosystem research](/experience/investor-research-ecosystem/)) | Tax-aware, benchmark-attributed, holdings-linked: XIRR vs benchmark vs cash drag, concentration and risk analytics, screen→basket→SIP |
+| **Research** | ICICI Direct | Coverage breadth: 220+ stocks, sector baskets, F&O ideas ([ICICI Research](https://www.icicidirect.com/research)) | The public scorecard: every call's history, hit rate, drawdown and thesis changes visible — research that shows its misses |
+| **Education** | Zerodha Varsity | Free, open, ad-free, no-signup curriculum that became the default link Indians send ([Varsity](https://zerodha.com/varsity/)) | Contextual unlocks from the user's real portfolio ("you hold 6 smallcaps — here's concentration risk, with your numbers") + regional-language risk-first content |
+| **Community** | Dhan MadeForTrade + TradingQ&A | Serious-trader community with product-team presence; public Q&A that ranks in search ([MadeForTrade](https://madefortrade.in/), [TradingQ&A](https://tradingqna.com/)) | Strict no-hype rules (no P&L bait, no signals), public roadmap closure, API category with engineering answers |
+| **Support** | Zerodha + Dhan | Searchable support with formal escalation (SCORES/ODR) visible; Dhan's no-calls/no-RM/no-spam promise ([brand research](/experience/support-trust-brand/)) | Severity-based SLA with market-literate agents; every ticket linked to order IDs, timestamps and ledger lines; free call-and-trade during declared incidents |
+| **Reliability** | Fyers | Component-level public status page with 90-day history ([FYERS Status](https://status.fyers.in/)) | Personal incident-impact view ("were *my* orders affected?"), postmortems, pre-committed compensation policy, expiry-day war-room updates |
+| **Trust & brand** | Zerodha | The trust *system*: no ads, no tips, transparent pricing, founder candor, referral-led growth ([Z-Connect](https://zerodha.com/z-connect/business-updates/zerodhas-referral-program-is-back)) | Trust by proof, not just restraint: complaint scoreboard, custody reconciliation dashboard, monthly trust report (see [Competing Moats](/moats/competing-moats/)) |
+| **Mass-market calm** | Groww | Anxiety-free onboarding and plain language that made it #1 ([Groww](https://groww.in/)) | Invest mode with the same calm — but no graduation cliff when the user gets serious (see [Segment Wedges](/moats/segment-wedges/)) |
+
+## The five experience pillars
+
+Rolling the table up, every lift lands in one of five pillars. These are the product's organizing principles — each pillar must be owned end-to-end by one team with one quality bar:
+
+<CardGrid>
+  <Card title="1 · Money moves like UPI" icon="seti:shell">
+    In free and instant with visible limits; out instant including weekends; every rupee's state (settled, unsettled, collateral, withdrawable) always explained. Benchmark: beat Zerodha's published payout terms.
+  </Card>
+  <Card title="2 · Orders tell the truth" icon="approve-check">
+    Predictable latency with per-order proof, exact reject reasons before and after submission, one audit trail across UI/chart/basket/API. Benchmark: nobody — this is white space.
+  </Card>
+  <Card title="3 · Cost is never a surprise" icon="seti:csv">
+    All-in cost before, attributed statement after, funding interest in ₹/day, savings provable and shareable. Benchmark: m.Stock's price with Zerodha's clarity, then beyond both.
+  </Card>
+  <Card title="4 · Risk is visible before it bites" icon="warning">
+    Margin previews, shortfall forecasts, rejected-leg simulation, expiry guardrails, delivery-risk countdowns, concentration analytics. Benchmark: Sensibull's analytics fused into execution.
+  </Card>
+  <Card title="5 · The platform remembers and explains" icon="open-book">
+    Journal, strategy P&L, replay, contextual education, CA-ready reports, household view. Benchmark: Console's authority with INDmoney's breadth.
+  </Card>
+</CardGrid>
+
+## What deliberately does *not* get lifted
+
+Best-of-breed assembly fails when it copies indiscriminately. These proven-successful incumbent patterns are excluded on purpose:
+
+| Pattern | Who runs it successfully | Why Arrow excludes it |
+|---|---|---|
+| Celebrity/IPL mass campaigns | Angel One, Upstox | High CAC, low-intent cohorts; contradicts proof-based brand. Upstox's decline (−27.6% FY26) shows awareness without product identity doesn't retain ([landscape](/market-landscape/)) |
+| RM/telecalling-assisted conversion | Angel One, bank brokers | The wedge segments equate RMs with sales pressure; Dhan's "no RM" promise is a loved feature ([brand research](/experience/support-trust-brand/)) |
+| Advisory/tips near execution | Angel, full-service brokers | Regulatory surface + trust contamination; research only with public scorecard, later |
+| Voucher referral programs | Upstox (250+ brands) | Attracts coupon hunters; fee-offset credits attract traders |
+| Insurance/loan cross-sell in-app | Upstox, ICICI | Trust contamination before broker credibility exists; Phase 3 at the earliest, opt-in |
+| Teaser pricing with opaque recovery | Parts of the discount segment | One "why was I charged?" moment destroys more value than the teaser created |
+
+## Sequencing the assembly
+
+The full composite is years of work; the order is chosen so each layer generates the proof that markets the next:
+
+1. **Launch (Phase 1):** pillars 1–3 complete + pillar 4's trading core (margin preview, true cost, chain, baskets, Latency Ledger v1) + free API with sandbox. This is the wedge promise: *money, orders and costs tell the truth.*
+2. **Fast-follow:** Expiry Mode, journal + strategy P&L (pillar 5's trader half), paper trading, complaint dashboard, savings cards.
+3. **Phase 2:** pillar 5's investor half — Portfolio Intelligence, MF/ETF/IPO/bonds, family workspace, research scorecard, contextual education.
+4. **Phase 3:** ecosystem — partner OAuth, strategy lifecycle, pro-desk mode, Smart Cash, model portfolios.
+
+Full launch/fast-follow/later assignments per feature are in the [Feature Parity Matrix](/strategy/feature-parity-matrix/) and the [Go-To-Market plan](/strategy/go-to-market/).
+
+<Aside type="caution" title="The execution bar this implies">
+A composite of best-in-class slices means being compared to the *best* incumbent in every slice simultaneously: payouts judged against Zerodha, charts against Dhan, price against m.Stock, calm against Groww. Shipping any slice at 80% of its benchmark reads as failure to that slice's natives. This is why the launch scope is narrow and the quality bar per pillar is absolute — better to launch with three pillars at benchmark-plus than five at benchmark-minus.
+</Aside>

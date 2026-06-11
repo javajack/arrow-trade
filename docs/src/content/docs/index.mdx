@@ -1,0 +1,85 @@
+---
+title: "Arrow Strategy Overview"
+description: "A polished research hub for Arrow Trade's Indian broking strategy."
+hero:
+  tagline: "A research hub for Arrow Trade's Indian broking strategy: professional execution, transparent risk, reliable APIs and inspectable trust."
+  actions:
+    - text: Market Landscape
+      link: /arrow-trade/market-landscape/
+    - text: Go-To-Market Strategy
+      link: /arrow-trade/strategy/go-to-market/
+      variant: secondary
+      icon: right-arrow
+---
+
+import { Aside, Card, CardGrid } from '@astrojs/starlight/components';
+import Mermaid from '../../components/Mermaid.astro';
+
+<Aside type="tip" title="Core thesis">
+The open mindshare gap is not "cheaper Zerodha" or "Groww for pros." It is a broker where order state, latency, margin, fees, tax, API behavior and incident impact are visible enough for serious users to trust under stress.
+</Aside>
+
+<CardGrid>
+  <Card title="4.56cr NSE active clients" icon="seti:chart">
+    May 2026 active-client count, down from 4.92cr in March 2025.
+  </Card>
+  <Card title="28.64% Groww share" icon="seti:chart">
+    Groww's May 2026 NSE active-client share.
+  </Card>
+  <Card title="Rs 10 pricing anchor" icon="seti:config">
+    New active-trader anchor set by m.Stock and Kotak Neo.
+  </Card>
+  <Card title="9 research documents" icon="seti:folder">
+    Source strategy documents transformed into this site.
+  </Card>
+</CardGrid>
+
+## Site Map
+
+<CardGrid>
+  <Card title="Market Landscape" icon="seti:chart">
+    Share shifts, F&O regulation, broker economics and the whitespace for a pro-trader operating system. Start with [Market Landscape](/market-landscape/).
+  </Card>
+  <Card title="Experience Research" icon="seti:folder">
+    The five operating dimensions: onboarding and money movement, trading and APIs, investor research, pricing and margin, and trust.
+  </Card>
+  <Card title="Strategy" icon="seti:config">
+    The parity matrix, validated backlog and go-to-market plan translate research into launch choices.
+  </Card>
+  <Card title="Algo Trading" icon="seti:powershell">
+    The regulated algo opportunity: [SEBI/NSE framework](/algo/regulatory-framework/) with exact thresholds and timelines, the [post-framework platform landscape](/algo/platform-landscape/), and the case for [compliance as the product](/algo/productizing-registration/) — registration-as-a-service and a broker-hosted algo cloud.
+  </Card>
+  <Card title="Moats & Wedges (Deep Synthesis)" icon="puzzle">
+    The defensibility layer: [competing moats](/moats/competing-moats/) incumbents can't copy, [segment-by-segment wedges](/moats/segment-wedges/) for every user type, the [best-of-breed blueprint](/moats/best-of-breed-blueprint/) assembling the strongest experience from every broker, and [social-proof validation](/moats/wow-validation/) of every wow claim.
+  </Card>
+</CardGrid>
+
+## Strategic Narrative
+
+Arrow's launch position should be **the serious trader's broker: pro execution, transparent risk, reliable APIs and inspectable trust**. This is not a beginner-first wedge. Beginner simplicity matters later, but Phase 1 should feel dense, fast and respectful to traders who already know Zerodha, Dhan, Fyers, Upstox, Angel SmartAPI and m.Stock.
+
+<Mermaid title="Arrow strategic flywheel" chart={`flowchart LR
+  A[Pro F&O and API wedge] --> B[Order, cost and risk telemetry]
+  B --> C[Trust during expiry, outages and tax season]
+  C --> D[High-quality referrals and API community]
+  D --> E[More active usage and better product data]
+  E --> B
+  C --> F[Investor-grade wealth layer]
+  F --> G[Household assets and lower F&O dependence]
+  G --> C`} />
+
+## What Matters Most
+
+| Priority | Why it matters | Where to read |
+|---|---|---|
+| Inspectable execution | Traders switch when order state, latency, rejects and incident impact stop being guesswork. | [Trading, F&O and APIs](/experience/trading-experience-fno-api/) |
+| Money and reports as product | Instant payout, ledgers, Tax P&L and CA packets create trust outside the trading screen. | [Onboarding, Money and Back Office](/experience/onboarding-money-backoffice/) |
+| True total cost | Rs 20 brokerage is no longer enough; the winning product shows brokerage, statutory charges, funding, slippage and DP/pledge costs live. | [Pricing, Margin and MTF](/experience/pricing-margin-mtf/) |
+| Trust by proof | No-spam support, public status, complaint metrics, custody proof and postmortems should be product surfaces. | [Support, Trust and Brand](/experience/support-trust-brand/) |
+| Phase discipline | Ship the F&O/API wedge first, then investor wealth, then ecosystem. | [Go-To-Market Strategy](/strategy/go-to-market/) |
+
+## Recommended Launch Shape
+
+1. Launch with resident KYC, F&O-first activation, Rs 10/order or equivalent pro economics, public tariff, TradingView-grade charts, advanced option chain, free personal API, sandbox v1, True Cost Meter, Latency Ledger, public status page, instant payout if supported, named back office, Tax P&L and CA packet v1.
+2. Fast-follow with Expiry Mode, paper trading, order replay, strategy journal, complaint dashboard, shareable savings card, realistic sandbox, endpoint uptime and MTF cost controls.
+3. Expand into Portfolio Intelligence, MFs, ETFs, IPOs, bonds, family workspace, research scorecards and partner marketplace only after the pro wedge has reliability proof.

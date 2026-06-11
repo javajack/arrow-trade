@@ -1,0 +1,126 @@
+---
+title: "Algo Regulation — The Framework"
+description: "SEBI's retail algo framework and NSE's implementation: dates, thresholds, static IP rules, registration paths and the exact end-customer journey today."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+import Mermaid from '../../../components/Mermaid.astro';
+
+<Aside type="caution" title="Compliance-grade research, not legal advice">
+Everything here is sourced from primary SEBI/NSE circulars (linked inline) as of June 2026. BSE/MCX equivalents and exact registration fees are marked unverified and must be confirmed with exchange membership teams before SOP sign-off.
+</Aside>
+
+## The one-paragraph version
+
+Since **April 1, 2026**, retail API trading in India is a broker-supervised regulated activity for *all* brokers. The broker is **principal**, the algo vendor is the broker's **agent**. There are no open APIs: every API order requires a unique API key, a **whitelisted static IP**, OAuth + 2FA, daily session logout, and algo tagging. Self-written client algos at or below **10 orders/second** (per exchange/segment, measured on the broker server's calendar second) need **no exchange strategy registration** — they're tagged with generic algo ID **99999**. Anything above 10 OPS, every broker-generated algo, and every vendor algo must be **registered with the exchange** and receives a unique algo ID. Black-box strategies additionally require the provider to be a SEBI-registered **Research Analyst** with a maintained research report per algo. Source: [SEBI circular SEBI/HO/MIRSD/MIRSD-PoD/P/CIR/2025/0000013, Feb 4 2025](https://www.sebi.gov.in/legal/circulars/feb-2025/safer-participation-of-retail-investors-in-algorithmic-trading_91614.html) and [NSE implementation standards NSE/INVG/67858](https://nsearchives.nseindia.com/content/circulars/INVG67858.pdf).
+
+## How we got here
+
+| Era | What governed retail algos | What changed |
+|---|---|---|
+| 2012–2021 | [SEBI's 2012 institutional algo framework](https://www.sebi.gov.in/legal/circulars/mar-2012/broad-guidelines-on-algorithmic-trading_22471.html) — built for exchange members, not retail scripts | Retail API automation (Kite Connect bots, Streak, Tradetron) operated in a grey zone: brokers offered APIs, platforms sold automation, nothing mapped to the institutional approval regime |
+| 2021–2022 | [Dec 2021 discussion paper on retail algo trading](https://www.sebi.gov.in/sebi_data/attachdocs/feb-2025/1738665456458.pdf); [Sep 2022 circular](https://nsearchives.nseindia.com/content/circulars/COMP53555.pdf) banning brokers from referencing past/expected algo returns | First crackdown was on *mis-selling* (return-claim marketing by unregulated platforms), not on automation itself |
+| Feb 2025 → Apr 2026 | The retail framework, phased in through four circulars | Retail automation became formalized: broker-as-principal, static IP, OPS categories, exchange registration, kill switches |
+
+### The timeline that matters
+
+| Date | Event |
+|---|---|
+| **Feb 4, 2025** | Framework created ([SEBI circular](https://www.sebi.gov.in/legal/circulars/feb-2025/safer-participation-of-retail-investors-in-algorithmic-trading_91614.html)) |
+| **May 5, 2025** | NSE implementation standards: 10 OPS threshold, static IP rules, API controls ([NSE/INVG/67858](https://nsearchives.nseindia.com/content/circulars/INVG67858.pdf)) |
+| **Jul 22, 2025** | NSE detailed operational modalities: empanelment, registration forms, TATs, RMS requirements ([NSE/INVG/69255](https://nsearchives.nseindia.com/content/circulars/INVG69255.zip)) |
+| **Oct 1, 2025** | Ready brokers go live ([SEBI glide path](https://www.sebi.gov.in/legal/circulars/sep-2025/extension-of-timeline-for-implementation-of-sebi-circular-dated-february-04-2025-on-safer-participation-of-retail-investors-in-algorithmic-trading-_96979.html)) |
+| **Jan 5, 2026** | Non-compliant brokers barred from onboarding new retail API clients |
+| **Apr 1, 2026** | Universal applicability — and the date real enforcement friction hit users (see [Upstox community thread](https://community.upstox.com/t/important-update-regulatory-changes-for-api-and-algo-trading-are-now-live/14874)) |
+
+## The rules that shape product design
+
+### Who must do what
+
+| Stakeholder | Core obligations |
+|---|---|
+| **Broker (principal)** | No open APIs; unique API keys + static IP whitelist + OAuth/2FA; detect and categorize algo orders; tag every algo order; seek exchange approval for registered algos and changes; deal only with empanelled vendors; monitor for prohibited activity; handle all grievances; 5-year audit trail; system audit/VAPT |
+| **Algo vendor (agent)** | Exchange empanelment before offering algo-order placement through broker APIs (NSE TAT: **T+30 working days**); product + strategy registration; black-box → SEBI-registered RA with per-algo research report; no performance/return marketing |
+| **Exchange** | SOPs, simulation testing, kill switch by algo ID, registration processing (normal **T+10**, execution algos **T+7** working days), inspection of broker capability |
+| **Retail client** | Free to self-develop algos; registration via broker required above 10 OPS; one registered algo usable by family (self, spouse, dependent children/parents) |
+
+### Static IP — the rule that bites hardest
+
+From [NSE/INVG/67858](https://nsearchives.nseindia.com/content/circulars/INVG67858.pdf):
+
+- One **primary static IP** mandatory per client for API access (optional secondary for redundancy) — *including* for sub-10-OPS personal algos.
+- IP changes normally allowed **once per calendar week**.
+- One IP maps to **one client only**, except formally requested family sharing.
+- Multiple API keys allowed, but **unregistered algos must run through one predefined key** (prevents OPS splitting across keys).
+- All API sessions **must log out daily** before the next trading day.
+- For client algos the IP is the client's; vendor algos may use the vendor's IP; broker algos the broker's.
+
+### The 10-OPS line
+
+<Mermaid title="Which path does an algo take?" chart={`flowchart TD
+    A["Order arrives via API"] --> B{"Self-developed\nby client?"}
+    B -- "No — vendor or broker algo" --> R["Exchange registration required\nVendor: empanelment T+30 +\nstrategy registration T+10/T+7\nUnique algo ID"]
+    B -- "Yes" --> C{"More than 10 orders/sec\nper exchange/segment?"}
+    C -- "No" --> G["No strategy registration\nGeneric algo ID 99999\nStill required: static IP, 2FA,\nsingle API key, limit orders,\nbroker RMS + audit trail"]
+    C -- "Yes" --> T["Register via broker as\n'tech-savvy retail investor':\nstrategy write-up + RMS write-up\n+ auditor certificate\nNSE T+10 working days\nUnique algo ID + monthly mock"]
+`} />
+
+Two traps inside this picture, both confirmed by exchange text:
+
+1. **"All API orders are algo orders."** NSE treats every order arriving via API — even a manually decided one fired from your own script — as an algo order subject to tagging and API controls ([NSE/INVG/69255](https://nsearchives.nseindia.com/content/circulars/INVG69255.zip)). The framework regulates the *channel*, not the user's intent.
+2. **"Below 10 OPS" waives registration, not compliance.** Static IP, 2FA, key discipline, RMS and tagging all still apply. Brokers that message this imprecisely generate the support anger visible in the April 2026 rollout threads.
+
+### White-box vs black-box
+
+| | White-box / execution | Black-box |
+|---|---|---|
+| Logic | Disclosed, replicable (Execution/TWAP/VWAP types) | Hidden from user (alpha-seeking, HFT, scalping types) |
+| Registration | Standard registration; fast-track **T+7** for execution algos | Provider must be SEBI-registered **Research Analyst**; detailed research report per algo |
+| Changes | Re-registration per change-control matrix | **No modification allowed** — logic change = fresh registration |
+
+### Order-type and RMS mandates
+
+NSE's modalities effectively **ban naked market orders on API** (price protection requires a limit price); Upstox and ICICI Breeze both implemented "market orders not permitted" ([Upstox community](https://community.upstox.com/t/important-update-regulatory-changes-for-api-and-algo-trading-are-now-live/14874), [ICICI Breeze docs](https://api.icicidirect.com/breezeapi/documents/index.html)). Mandatory broker-side pre-trade RMS includes price/quantity/value checks, market-price protection, cumulative open-order value, runaway-loop detection, margin checks and MWPL/position limits ([NSE/INVG/69255](https://nsearchives.nseindia.com/content/circulars/INVG69255.zip)).
+
+## The end-customer journey, exactly as it stands
+
+### Path A — your own algo, ≤ 10 OPS <Badge text="days, mostly broker-dependent" variant="caution" />
+
+1. Account + segment activation (F&O/commodity as needed)
+2. Create API app/key under the broker's console; accept algo terms
+3. **Procure and submit a static IP** — the step most retail users stumble on (home broadband is dynamic; the practical answer is a ₹300–600/month VPS)
+4. Broker maps key↔IP, applies OAuth+2FA, daily logout
+5. Trade. Broker tags orders with generic ID 99999, enforces ≤10 OPS on its server clock, blocks market orders
+6. No exchange paperwork, ever — as long as you stay under the threshold
+
+**Real friction observed:** "In Review" approval states blocking live orders for days, confusion about whether static IP applies below 10 OPS (it does), families unable to share one IP across accounts, MCX API access temporarily suspended during rollout ([Upstox community, Mar 31–Apr 2 2026](https://community.upstox.com/t/important-update-regulatory-changes-for-api-and-algo-trading-are-now-live/14874)).
+
+### Path B — your own algo, > 10 OPS <Badge text="2–4+ weeks end to end" variant="danger" />
+
+1. Apply to the broker for exchange registration of the self-developed algo
+2. Broker classifies you as **"tech-savvy retail investor"**, discloses your PAN + UCC to the exchange
+3. Prepare documents: **strategy write-up, RMS write-up, auditor's certificate** — yes, a retail trader needs an auditor
+4. Broker submits to exchange; NSE processes in **T+10 working days** (T+7 if it qualifies as an execution algo)
+5. Exchange assigns your unique algo ID; broker maps it to your orders
+6. Ongoing: **monthly mock/simulation participation**, and a re-registration cycle for logic changes, segment additions, even broker-side OMS changes that touch your algo
+
+### Path C — vendor/marketplace strategy <Badge text="weeks to months for new vendors" variant="danger" />
+
+Vendor empanelment (T+30 working days, 2-year securities-market experience requirement for a principal) → product registration (UI write-up, RMS, audit certificate, ISO/VAPT artifacts) → per-strategy registration (T+10/T+7) → broker due diligence and fee-sharing disclosure → only then live client orders. Black-box adds RA registration and research-report maintenance.
+
+## Grey areas the industry is still arguing about
+
+| Grey area | Status |
+|---|---|
+| Static IP for low-OPS personal scripts | Mandatory per NSE standards; retail users argue it kills mobility and cheap cloud deployment — the loudest single complaint of the rollout |
+| What counts as a "logic change" requiring re-registration | Undefined boundary between parameter tweaks (risk limits, instrument lists) and logic changes; brokers need their own change-classification matrix |
+| OPS gaming | Spreading orders across seconds/segments/family accounts/keys; brokers are expected to monitor circumvention, not just throttle per key |
+| Broker-server hosting requirement | NSE says retail algos — including empanelled-vendor algos — should be hosted on broker servers with client data not flowing beyond them; existential architecture question for SaaS platforms holding client API keys |
+| Exchange divergence | NSE is thoroughly documented; **BSE/MCX operational circulars, fees and TATs unverified** in this research — assume alignment, verify before filing SOPs |
+| Enforcement | No published SEBI penalty specifically under the retail framework yet (as of this research); NSE has been actively processing vendor empanelments monthly since Jan 2026 |
+
+<Aside type="note" title="What this means for Arrow">
+The framework hands a structural gift to whichever broker treats compliance as UX rather than as friction. The full argument — and whether end-customer registration itself can be productized — is in [Productizing Algo Compliance](/algo/productizing-registration/).
+</Aside>
+
+Full source list with circular numbers: `research/10-algo-regulation.md` in the repo.

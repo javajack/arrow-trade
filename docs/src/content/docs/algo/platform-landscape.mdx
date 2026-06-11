@@ -1,0 +1,90 @@
+---
+title: "Algo Platform Landscape"
+description: "Who shipped what after the SEBI retail algo framework — broker by broker, platform by platform, with compliance posture, pricing, friction and user sentiment."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+The market has split into four postures since the framework: **API-first brokers** (Zerodha, Dhan, Fyers, Upstox, m.Stock), **compliance-visible brokers** whose docs spell out the new rules (ICICI Breeze, Upstox, Dhan), **no-code/strategy platforms** racing through empanelment (Tradetron, uTrade Algos, Streak, AlgoTest), and **institutional vendor stacks** (Symphony Presto, Greeksoft, ODIN) that have the exchange-grade tech but not the retail UX.
+
+## Broker scoreboard
+
+Friction: <Badge text="LOW" variant="success" /> mostly self-serve · <Badge text="MEDIUM" variant="caution" /> static-IP/review with clear docs · <Badge text="HIGH" variant="danger" /> manual ops or opaque public flow.
+
+| Broker | What they shipped | Compliance visibility | Pricing | Friction |
+|---|---|---|---|---|
+| **Zerodha Kite Connect** | The mature benchmark: orders/GTT/portfolio APIs, WebSocket, historical data, SDKs in 9 languages, the Sensibull/Streak/Quicko ecosystem ([Zerodha API](https://zerodha.com/products/api/)) | Cut API fees explicitly in response to the NSE framework; Kamath positioned ≤10-OPS self-written strategies as registration-free with static IP ([ET, May 2025](https://economictimes.indiatimes.com/markets/stocks/news/zerodha-to-slash-api-fees-as-nse-unveils-new-retail-algo-trading-framework-nithin-kamath/articleshow/120935753.cms)). Public registration UI not visible | Personal free; Connect ₹500/mo for WebSocket + historical | <Badge text="MEDIUM" variant="caution" /> |
+| **Dhan / DhanHQ** | Free full-suite APIs incl. option chain, slicing, forever orders — plus the standout: **Trader's Control APIs** (programmable kill switch, P&L-based auto-exit) ([docs](https://dhanhq.co/docs/v2/traders-control/)) | Docs expose static-IP requirement on order APIs and an `algoId` (exchange algo ID) field in order responses — the cleanest algo-ID propagation seen ([orders API](https://dhanhq.co/docs/v2/orders/)) | Free; 10 order req/s, 7,000/day | <Badge text="MEDIUM" variant="caution" /> |
+| **Upstox** | APIs + Algoverse; the most transparent *enforcement* story: rate-limit docs split **Regular Algos (10/s, no registration)** vs **SEBI-Registered Algos (50/s)** ([rate limits](https://upstox.com/developer/api-documentation/rate-limiting/)) | April 1, 2026 go-live announced publicly: static IP mandatory for all API orders, market orders banned, MPP on by default, MCX API temporarily disabled ([community thread](https://community.upstox.com/t/important-update-regulatory-changes-for-api-and-algo-trading-are-now-live/14874)) | Limits explicit, pricing not | <Badge text="HIGH" variant="danger" /> during transition |
+| **ICICI Direct Breeze** | Bank-broker API for NSE equity/F&O with the **most explicit compliance documentation**: orders only from registered static IPs, weekly IP-change limit, single key for unregistered algos, combined 10-OPS across place/modify/cancel, market orders prohibited ([Breeze docs](https://api.icicidirect.com/breezeapi/documents/index.html)) | The model for rule clarity — a bank broker out-documenting the fintechs | 100 calls/min, 5,000/day | <Badge text="MEDIUM" variant="caution" /> |
+| **m.Stock** | Zero-cost trading + data APIs, ₹10/order, "10 orders/sec, unlimited/day, sub-100ms" claims, and a published partner list (Quantman, Tradetron, AlgoTest, Algomojo…) ([m.Stock API](https://www.mstock.com/trading-api)) | The 10/s cap mirrors the regulatory threshold; static-IP/registration UI not publicly visible | ₹0 API, ₹10/order | <Badge text="MEDIUM" variant="caution" /> |
+| **Fyers** | Free APIs, 1-lakh-requests/day, 7ms order claim, multi-language SDKs ([Fyers API](https://fyers.in/products/api)) | Post-framework specifics (IP flow, algo-ID propagation) not publicly documented — compliance opacity vs its pro-trader brand | Free | <Badge text="MEDIUM" variant="caution" /> leaning high |
+| **Angel SmartAPI** | Large historical third-party integration base | Docs are JS-rendered/opaque; post-framework changes unverified | Perceived free | <Badge text="HIGH" variant="danger" /> (opacity) |
+| **Kotak Neo, HDFC Sky, 5paisa, Paytm Money** | Kotak's ₹0-API-order pricing was a pre-framework wedge; current API compliance docs for all four were not publicly retrievable — all marked unverified | Note: Paytm Money still markets "Open API" — wording that now collides with SEBI's no-open-APIs principle | Unverified | <Badge text="HIGH" variant="danger" /> |
+
+## Third-party platform scoreboard
+
+| Platform | Model | Post-framework status | Signal |
+|---|---|---|---|
+| **Tradetron** | Cloud algo + strategy marketplace; claims 405k signups, ~60k algos, ~175k live trades/day; plans free→₹9,000/mo ([Tradetron](https://tradetron.tech/)) | **NSE-empanelled** as an authorized algo-tech provider per ET, Dec 2025 ([ET](https://m.economictimes.com/markets/options/nse-empanels-tradetron-a-big-step-in-indias-evolving-algo-trading-landscape/articleshow/125741311.cms)) | The marketplace leader chose compliance over pivot — validates the empanelment path at scale |
+| **uTrade Algos** | AI/no-code builder + backtest/forward-test; markets itself as "**Approved Algo Vendor for NSE and BSE**" with VAPT/ISO language ([uTrade](https://www.utradealgos.com/)) | Compliance-as-marketing — the first platform whose *pitch* is its approval status | The clearest sign that "exchange-approved" is becoming a consumer-facing trust badge |
+| **Streak** | No-code strategy bridge in Zerodha's ecosystem | Empanelment status unverified; the "backtest-to-live" feel is now approval-gated by definition | The grey-zone-era leader with the most to restructure |
+| **AlgoTest / Quantman / Quantiply** | Options backtest-to-live bridges; listed as m.Stock API partners | Empanelment unverified; Quantiply is candid that broker API performance is its limiting factor ([Quantiply](https://quantiply.tech/)) | Mid-tier platforms whose survival depends on broker/exchange registration throughput |
+| **Symphony Presto, Greeksoft, ODIN, TradeLab** | Institutional OMS/algo/low-latency stacks ([Greeksoft](https://greeksoft.co.in/)) | Already exchange-certified-adjacent; retail distribution would add RA/disclosure/grievance burden they've never carried | The tech exists; the retail product layer doesn't — a partnership/acquisition pool, not competitors |
+
+## Implementation patterns in the wild
+
+### Static IP: the friction economy it created
+
+| Pattern | Reality |
+|---|---|
+| Primary + secondary IP submission | Universal (NSE-mandated). ICICI documents the weekly change limit explicitly; Dhan enforces at the order-API level |
+| **The VPS workaround** | Home broadband is dynamic, so users rent AWS Lightsail/DigitalOcean boxes for the static egress IP and remote into them — community threads openly trade setup guides ([Upstox community](https://community.upstox.com/t/important-update-regulatory-changes-for-api-and-algo-trading-are-now-live/14874)). A ₹300–600/month shadow cost the framework imposed on every retail algo trader |
+| Family IP sharing | Formally possible (per SEBI's Dec 2024 family definition) but broken in practice — a four-account family on one IP found no broker workaround pending exchange clarity |
+| Single-key rule for unregistered algos | ICICI Breeze enforces it visibly; prevents OPS-splitting across keys; multi-bot hobbyists hate it |
+
+### The emerging "algo cloud"
+
+Hosted execution is becoming the default answer to static IP + uptime + daily-logout pain. Three architectures, with very different compliance fits:
+
+| Model | Compliance fit | Risk |
+|---|---|---|
+| **Client-owned VPS** (status quo workaround) | Fits the self-developed ≤10-OPS path; broker still controls keys/throttles/tags | Leaked tokens, no monitoring, user security debt |
+| **Broker-hosted runtime** (strategy containers / managed webhooks on broker infra) | Strongest fit — NSE *wants* retail algos hosted on broker servers with data not leaving them ([NSE/INVG/69255](https://nsearchives.nseindia.com/content/circulars/INVG69255.zip)) | Engineering and isolation burden on the broker |
+| **Empanelled-vendor hosting via broker** | Legal but slow: empanelment + product + strategy registration first | Marketplace governance, weeks-long vendor onboarding |
+
+No Indian broker currently *sells* the middle option. That gap is examined in [Productizing Algo Compliance](/algo/productizing-registration/).
+
+### Strategy marketplaces after the framework
+
+The 2022 return-claims ban ([SEBI via NSE/COMP/53555](https://nsearchives.nseindia.com/content/circulars/COMP53555.pdf)) plus black-box-needs-RA means the old marketplace playbook (leaderboards ranked by returns, opaque "signals") is dead. Compliant marketplaces now look like: logic-category disclosure, risk-control listings, white/black-box status badges, no performance rankings — and a registration backend per strategy. Tradetron's empanelment shows the model survives; its economics now depend on **compliance throughput** (how fast strategies clear registration) rather than bot capacity.
+
+### Risk controls becoming product surface
+
+| Control | Best current example |
+|---|---|
+| Programmable kill switch | Dhan's API kill switch (disable trading for the day) ([Trader's Control](https://dhanhq.co/docs/v2/traders-control/)) |
+| P&L-based auto-exit | Dhan: daily cumulative profit/loss thresholds trigger exit + optional kill switch |
+| Market-order ban + MPP defaults | Upstox, ICICI Breeze — bots written for MARKET/SL-M orders all broke on April 1, 2026; migration helpers were left to forum posts |
+| Exchange kill by algo ID | Mandated; requires clean algo-ID propagation, which only Dhan visibly exposes in API responses today |
+
+## What users actually said (April 2026 rollout)
+
+The Upstox community thread is the best live record of enforcement day:
+
+- *"Does static IP apply below 10 OPS?"* → Yes, for all API orders — the single most repeated confusion.
+- *"Static IP kills cheap cloud and mobility"* → answered by other users with Lightsail/DigitalOcean recipes, not by the broker.
+- *"Family of four, one IP, can't map it"* → no workaround, pending exchange clarity.
+- *"Status stuck In Review, orders failing"* → deterministic approval states didn't exist.
+- MCX API trading suspended mid-rollout with no per-segment readiness display.
+
+Every one of those is a product requirement Arrow gets to design for from scratch — the competitor's support forum is the requirements document.
+
+## Global reference points
+
+| Platform | What smooth looks like | The Indian adaptation |
+|---|---|---|
+| **Interactive Brokers** | TWS API with paper trading, pacing limits, API logs, deep debugging docs ([IBKR](https://www.interactivebrokers.com/campus/ibkr-api-page/trader-workstation-api/)) | Copy the audit/debug depth; hide exchange compliance behind a console |
+| **Alpaca** | Docs-first onboarding, paper/live environments, clean key management ([Alpaca](https://alpaca.markets/)) | Sandbox-first onboarding + static-IP readiness checks + OPS counters |
+
+Full per-item citations and the unverified-items watchlist: `research/11-algo-platforms-practices.md` in the repo.

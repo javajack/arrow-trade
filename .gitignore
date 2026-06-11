@@ -1,0 +1,14 @@
+# dependencies & build output
+docs/node_modules/
+docs/dist/
+docs/.astro/
+
+# agent/tool artifacts
+.codex/
+.codex-tasks/
+.agents/
+
+# misc
+nohup.out
+*.log
+.DS_Store
