@@ -7,8 +7,8 @@ import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
 
 This registry answers one question with evidence: **what do real users of Indian trading platforms still complain about and keep asking for, right now?** Window: **June 2025 – June 2026**, every item dated. Sources are triangulated across four classes: community forums (TradingQ&A, MadeForTrade, Upstox Community — full thread links and post counts), recent 1–2★ Play Store / App Store reviews (none older than March 2026), press coverage of X/Twitter complaint waves, and — the verification anchor — **NSE's formal complaint, redressal and penalty filings**.
 
-<Aside type="caution" title="Honest coverage limits">
-Reddit blocked direct extraction from the research environment (403s on HTML/JSON/old.reddit) — Reddit-only claims are excluded rather than guessed. X/Twitter is login-gated, so X evidence enters via press reports that quote complaint waves ("press/X-proxy"). Brokers without public communities (Groww, m.Stock, Kotak…) are covered through stores + formal data only. Raw evidence with every link: `research/12, 13, 14` in the repo.
+<Aside type="tip" title="Now includes first-party Reddit + X evidence">
+The original pass was press-proxy only (sandboxed network). This registry has since been **upgraded with a logged-in browser scrape**, run with human pacing: **224 Reddit search hits + 14 deep-dive threads** across r/IndianStockMarket, r/IndianStreetBets and r/personalfinanceindia, plus **246 X/Twitter posts** (158 pain-relevant). The first-party data *confirmed and sharpened* every theme below — and surfaced new ones (see [First-Party Signals](#first-party-signals-what-reddit--x-actually-say)). Raw captures and full analysis: `research/12–15` in the repo.
 </Aside>
 
 **Evidence grades used below:**
@@ -43,9 +43,11 @@ The single most damaging theme. Three documented Zerodha incidents in the window
 
 Silent order-semantics changes are a rage trigger distinct from outages: Dhan converted market orders to limit orders and sell legs went unexecuted — users demanded compensation in a 13-post thread (Mar 9, 2026, [MadeForTrade](https://madefortrade.in/t/market-orders-automatically-converted-to-limit-order/61603)); Upstox exits rejected at 15:13 before the 15:15 square-off with no explanation ([thread](https://community.upstox.com/t/unable-to-exit-intraday-orders-before-3-15-pm-orders-got-rejected-and-auto-square-off-happened-please-explain-the-reason/13292)); an Upstox NIFTY option buy executed far above available margin, with "multiple customers reported the same" (Feb 3, 2026); Kite SL orders rejected on phantom "insufficient funds"; Shoonya turning sold holdings into intraday short-sells. The ask underneath all of it: **deterministic order behavior, exact reject reasons, and never silently changing order type.**
 
-### 3. Hidden and unexplained charges <Badge text="VERIFIED" variant="success" />
+### 3. Hidden and unexplained charges <Badge text="VERIFIED" variant="success" /> — the #1 viral genre
 
-The highest-frequency theme across *every* source class, even at top-rated apps: Upstox users promised "lifetime free AMC" now getting AMC emails daily ([rage thread, Apr 2026](https://community.upstox.com/t/alarming-concern-over-hidden-charges-being-applied-without-notice-and-calling-upon-people-to-raise-their-voice-aginst-amc-charges/15294)) and *"now pay charges for withdrawing my own money — how is this even justified?"*; m.Stock quarterly-charge surprises after "zero charges" onboarding; Kotak's ₹7 fund-add fee; ICICI's unpledge charges; Dhan charging for bank/email/phone changes; INDmoney's hidden FX spread on US stocks; Zerodha DP-charge confusion. Contract-note vs calculator mismatch threads (Upstox, 7–9 posts each, May 2026) show even *legitimate* charges fail explainability. **Verifies the True Cost Meter as the right wedge** ([pricing research](/experience/pricing-margin-mtf/)).
+The first-party scrape settled the ranking: the two **highest-engagement broker posts found anywhere** are both about charge hypocrisy, not outages — *"Zerodha tweets like a monk, but charges like a cartel"* (**899 upvotes, 122 comments**, [r/IndianStockMarket Jul 2025](https://old.reddit.com/r/IndianStockMarket/comments/1me0tx8/)) and *"Zerodha CEO casually exposed DP charges scam"* (**775 upvotes**, [Jul 2025](https://old.reddit.com/r/IndianStockMarket/comments/1md4mmi/)). On X, an Upstox user with a "zero-AMC" account got the brokerage replying publicly *"These charges are part of our standard structure. We're unable to waive them"* ([@UpstoxSupport, Jun 2026](https://x.com/UpstoxSupport/status/2064967598857736661)). The anger isn't the rupee amount — it's the gap between *no-hidden-charges marketing* and the lived ledger.
+
+The same theme across *every* source class, even at top-rated apps: Upstox users promised "lifetime free AMC" now getting AMC emails daily ([rage thread, Apr 2026](https://community.upstox.com/t/alarming-concern-over-hidden-charges-being-applied-without-notice-and-calling-upon-people-to-raise-their-voice-aginst-amc-charges/15294)) and *"now pay charges for withdrawing my own money — how is this even justified?"*; m.Stock quarterly-charge surprises after "zero charges" onboarding; Kotak's ₹7 fund-add fee; ICICI's unpledge charges; Dhan charging for bank/email/phone changes; INDmoney's hidden FX spread on US stocks; Zerodha DP-charge confusion. Contract-note vs calculator mismatch threads (Upstox, 7–9 posts each, May 2026) show even *legitimate* charges fail explainability. **Verifies the True Cost Meter as the right wedge** ([pricing research](/experience/pricing-margin-mtf/)).
 
 ### 4. Withdrawal and payout trust <Badge text="VERIFIED" variant="success" />
 
@@ -94,6 +96,28 @@ Features users keep requesting across brokers in the window, ranked by recurrenc
 | Dark mode, iPad support | HDFC Sky, Sahi, Kotak | Store reviews |
 | MF STP/switch in-app | Paytm Money | Store reviews |
 
+## First-Party Signals: what Reddit + X actually say
+
+The logged-in scrape confirmed all ten themes — and surfaced five sharper signals the press-proxy pass couldn't see:
+
+### Charges-as-betrayal beats outages for virality
+The top-engagement posts are about the *gap between marketing and ledger*, not bugs. Tellingly, the top comment defending Zerodha praises it for **absences** — "no UPI charges, no daily F&O popups, no insurance upsell." Users reward the broker that refuses dark patterns. Direct validation of the [True Cost Meter](/experience/pricing-margin-mtf/) and the no-dark-patterns brand.
+
+### Switching is wanted but tax-friction traps users — an unguarded wedge
+Multiple "switching from Groww to Zerodha" threads (triggered by Groww's charge hikes), but the recurring blocker is portfolio transfer + tax-filing mess: *"A lot of people do not switch to a better stockbroker for only one reason — it messes up their tax filing"* ([@SanaSecurities, Aug 2025](https://x.com/SanaSecurities/status/1956969411291853275), calling for demat portability like mobile-number portability). **A tax-aware, transfer-charge-refunded migration flow directly attacks the one thing keeping unhappy users with incumbents** — currently no broker productizes it.
+
+### The option-writer charge-rage segment is loud and specific
+*"High-volume option writer paying ₹3.3L in charges for ₹1.98L profit! Need a zero/low brokerage broker with LOT-BASED UI and API support"* — cross-posted to [r/IndianStockMarket](https://old.reddit.com/r/IndianStockMarket/comments/1se9213/) and [r/IndianStreetBets](https://old.reddit.com/r/IndianStreetBets/comments/1se95el/) (Apr 2026). Charges *exceeding profit* is the most acute pain in the corpus, naming a precise unmet need.
+
+### Zerodha's Mar 2026 intraday-collateral charge is a live churn event
+*"Zerodha charging for intraday collateral now… tried changing broker, but got stuck"* (**145 upvotes**, [r/IndianStreetBets Mar 2026](https://old.reddit.com/r/IndianStreetBets/comments/1s352ch/)) — ₹40/order or 50% cash; users compare escape routes, find all of them bad, then get trapped by switching friction. Charge-rage and the migration-moat in one thread.
+
+### "Promise integrity" — reversed lifetime offers are permanent trust scars
+*"Mstock charged 3k upfront for zero brokerage on derivatives for lifetime, later started charging ₹5 per order"* ([@m_dheeru, Jan 2026](https://x.com/m_dheeru/status/2010979593029923090)); Upstox AMC on "zero-AMC" accounts. Every reversed lifetime/zero pledge is now a public scar — Arrow's pricing commitments must be permanent-or-unstated.
+
+### Counter-evidence worth keeping: the Dhan API bar
+Not everything is rage. Dhan's API earns genuine praise — *"Dhan's paid data API works reliably, Upstox fails more often than not"* ([@saurabh_hp, Jun 2026](https://x.com/saurabh_hp/status/2062752927232712997)), "best in ease of use and affordable" vs Kotak Neo and Kite, plus a 100+ builder meetup. **This is the bar Arrow's API must clear**, not just the failures to avoid.
+
 <Aside type="note" title="What this registry is for">
-Every theme above maps onto an existing Arrow thesis — reliability-as-product, True Cost Meter, deterministic orders, support SLAs, API lifecycle. The next page maps these signals to **which customer type bleeds from which pain**, and what wins each of them: [Pain by Customer Type](/pain-signals/pain-by-customer-type/).
+Every theme above maps onto an existing Arrow thesis — reliability-as-product, True Cost Meter, deterministic orders, support SLAs, API lifecycle — and the first-party pass adds two net-new wedges (**tax-aware migration**, **option-writer product**). The next page maps these signals to **which customer type bleeds from which pain**, and what wins each of them: [Pain by Customer Type](/pain-signals/pain-by-customer-type/).
 </Aside>

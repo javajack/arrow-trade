@@ -12,3 +12,5 @@ docs/.astro/
 nohup.out
 *.log
 .DS_Store
+scrape/node_modules/
+scrape/out/
