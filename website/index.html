@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arrow — institutional trading, in your own account</title>
+<meta name="description" content="Arrow brings iRage's institutional algorithmic execution to serious traders as a governed, broker-hosted Algo Cloud that runs inside your own NSE, BSE and MCX account. You keep custody. You keep control. No returns are promised or represented." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:        oklch(0.165 0.006 66);
+    --ink-deep:   oklch(0.13 0.006 66);
+    --raise:      oklch(0.215 0.007 66);
+    --raise-2:    oklch(0.26 0.008 66);
+    --hair:       oklch(0.32 0.008 66);
+    --bone:       oklch(0.94 0.008 80);
+    --muted:      oklch(0.72 0.012 74);
+    --faint:      oklch(0.56 0.012 72);
+    --signal:     oklch(0.69 0.193 36);
+    --signal-dim: oklch(0.5 0.12 36);
+    --ok:         oklch(0.78 0.11 150);
+    --sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --disp: "Archivo Expanded", "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --mono: "Spline Sans Mono", ui-monospace, monospace;
+    --edge: clamp(1.15rem, 5vw, 7rem);
+    --maxw: 1240px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--ink); color:var(--bone);
+    font-family:var(--sans); font-weight:400; line-height:1.65;
+    font-size:clamp(1rem,0.95rem + 0.3vw,1.18rem);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none}
+  h1,h2,h3{font-family:var(--disp); font-weight:700; line-height:1.02; letter-spacing:-0.02em; margin:0}
+  p{margin:0}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding-inline:var(--edge)}
+  .mono{font-family:var(--mono); font-weight:400; letter-spacing:0.02em}
+  .kicker{font-family:var(--mono); font-size:0.74rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--signal)}
+  .muted{color:var(--muted)}
+  .faint{color:var(--faint)}
+
+  /* reveal */
+  .rv{opacity:0; transform:translateY(22px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1)}
+  .rv.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion: reduce){.rv{opacity:1; transform:none; transition:none}}
+
+  /* nav */
+  header.nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.1) blur(8px);
+    background:color-mix(in oklab, var(--ink) 82%, transparent); border-bottom:1px solid transparent; transition:border-color .4s}
+  header.nav.scrolled{border-bottom-color:var(--hair)}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:66px; gap:1rem}
+  .brand{display:flex; align-items:center; gap:.6rem; font-family:var(--disp); font-weight:800; letter-spacing:-.01em; font-size:1.16rem}
+  .brand svg{display:block}
+  .nav-links{display:flex; gap:2.1rem; align-items:center}
+  .nav-links a{font-size:.92rem; color:var(--muted); transition:color .25s}
+  .nav-links a:hover{color:var(--bone)}
+  .nav-links .navcta{color:var(--bone)}
+  @media (max-width:860px){.nav-links a:not(.navcta){display:none}}
+
+  .btn{display:inline-flex; align-items:center; gap:.55rem; font-family:var(--sans); font-weight:600;
+    font-size:.95rem; padding:.72rem 1.2rem; border-radius:2px; border:1px solid var(--signal);
+    background:var(--signal); color:oklch(0.16 0.02 40); transition:transform .3s cubic-bezier(.16,1,.3,1), background .3s, box-shadow .3s; cursor:pointer}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 30px -12px var(--signal-dim)}
+  .btn.ghost{background:transparent; color:var(--bone); border-color:var(--hair)}
+  .btn.ghost:hover{border-color:var(--bone); box-shadow:none}
+
+  /* hero */
+  .hero{position:relative; padding-top:clamp(3rem,7vw,6.5rem); padding-bottom:clamp(3.5rem,7vw,7rem); overflow:hidden}
+  #sig{position:absolute; inset:0; width:100%; height:100%; z-index:0; opacity:.9}
+  .hero .wrap{position:relative; z-index:2}
+  .hero-grid{display:grid; grid-template-columns:1.5fr 1fr; gap:clamp(2rem,4vw,4rem); align-items:end}
+  @media (max-width:980px){.hero-grid{grid-template-columns:1fr}}
+  .h1{font-size:clamp(2.5rem,4.6vw + 1rem,5.6rem); max-width:16ch}
+  .h1 .sig{color:var(--signal)}
+  .lede{margin-top:1.5rem; font-size:clamp(1.05rem,1rem + 0.4vw,1.32rem); color:var(--muted); max-width:46ch; line-height:1.6}
+  .hero-cta{margin-top:2.2rem; display:flex; gap:.9rem; flex-wrap:wrap}
+  .hero-side{padding-bottom:.4rem}
+  .hero-side .line{display:flex; justify-content:space-between; gap:1rem; padding:.7rem 0; border-top:1px solid var(--hair); font-size:.86rem}
+  .hero-side .line:last-child{border-bottom:1px solid var(--hair)}
+  .hero-side .k{color:var(--faint); font-family:var(--mono); font-size:.74rem; letter-spacing:.08em; text-transform:uppercase}
+  .hero-side .v{color:var(--bone); text-align:right}
+
+  /* credibility strip */
+  .strip{border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); background:var(--ink-deep)}
+  .strip .wrap{display:flex; flex-wrap:wrap; gap:1rem 2.6rem; padding-block:1.1rem; align-items:center}
+  .strip .item{display:flex; align-items:baseline; gap:.6rem; font-size:.82rem; color:var(--muted)}
+  .strip .item b{color:var(--bone); font-weight:600}
+  .strip .reg{font-family:var(--mono); font-size:.76rem; color:var(--signal)}
+
+  section{padding-block:clamp(4rem,8vw,8rem)}
+  .seclabel{display:flex; align-items:baseline; gap:1rem; margin-bottom:2.4rem}
+  .seclabel .num{font-family:var(--mono); color:var(--signal); font-size:.8rem; letter-spacing:.1em}
+  .seclabel .nm{font-family:var(--mono); color:var(--faint); font-size:.78rem; letter-spacing:.18em; text-transform:uppercase}
+  .h2{font-size:clamp(1.9rem,1.4rem + 2.2vw,3.3rem); max-width:18ch}
+  .sec-lede{margin-top:1.1rem; color:var(--muted); max-width:60ch; font-size:1.08rem}
+
+  /* who */
+  .who{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:3rem; border:1px solid var(--hair)}
+  @media (max-width:900px){.who{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.who{grid-template-columns:1fr}}
+  .who > div{padding:1.7rem 1.5rem; border-right:1px solid var(--hair)}
+  .who > div:last-child{border-right:none}
+  @media (max-width:900px){.who > div{border-right:1px solid var(--hair); border-bottom:1px solid var(--hair)}}
+  .who .cap{font-family:var(--mono); color:var(--signal); font-size:.76rem; letter-spacing:.06em}
+  .who h3{font-size:1.18rem; margin-top:.7rem; letter-spacing:-.01em}
+  .who p{margin-top:.5rem; font-size:.92rem; color:var(--muted)}
+
+  /* algo cloud / steps */
+  .cloud{background:var(--ink-deep); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair)}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(1.2rem,2.5vw,2.4rem); margin-top:3rem}
+  @media (max-width:840px){.steps{grid-template-columns:1fr}}
+  .step .n{font-family:var(--disp); font-weight:800; font-size:2.6rem; color:var(--raise-2); line-height:1}
+  .step h3{font-size:1.3rem; margin-top:.5rem}
+  .step p{margin-top:.7rem; color:var(--muted); font-size:.98rem}
+  .step .tick{margin-top:1rem; font-family:var(--mono); font-size:.76rem; color:var(--signal); letter-spacing:.04em}
+
+  /* pillars */
+  .pillars{display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(1.4rem,3vw,3.4rem); margin-top:2.6rem; align-items:start}
+  @media (max-width:880px){.pillars{grid-template-columns:1fr}}
+  .plist{display:flex; flex-direction:column}
+  .pl{padding:1.4rem 0; border-top:1px solid var(--hair); display:grid; grid-template-columns:auto 1fr; gap:1.1rem; align-items:start}
+  .pl:last-child{border-bottom:1px solid var(--hair)}
+  .pl .idx{font-family:var(--mono); color:var(--signal); font-size:.8rem; padding-top:.2rem}
+  .pl h3{font-size:1.16rem; letter-spacing:-.01em}
+  .pl p{margin-top:.35rem; color:var(--muted); font-size:.95rem}
+  .pcard{position:sticky; top:90px; background:var(--raise); border:1px solid var(--hair); padding:1.8rem; border-radius:3px}
+  .pcard .kicker{margin-bottom:1rem; display:block}
+  .pcard .big{font-family:var(--disp); font-weight:700; font-size:1.5rem; line-height:1.12; letter-spacing:-.01em}
+  .pcard .small{margin-top:1rem; color:var(--muted); font-size:.95rem}
+  .pcard .barrier{margin-top:1.4rem; padding-top:1.2rem; border-top:1px solid var(--hair); font-family:var(--mono); font-size:.78rem; color:var(--faint); line-height:1.7}
+  .pcard .barrier b{color:var(--ok); font-weight:500}
+
+  /* promises */
+  .promise{text-align:left}
+  .promise .big{font-size:clamp(2.1rem,1.4rem + 3vw,4.2rem); max-width:20ch}
+  .promise .big em{font-style:normal; color:var(--signal)}
+  .promise p{margin-top:1.4rem; color:var(--muted); max-width:54ch; font-size:1.08rem}
+
+  /* trust rows */
+  .trust{display:grid; grid-template-columns:repeat(2,1fr); gap:0; margin-top:3rem; border-top:1px solid var(--hair)}
+  @media (max-width:760px){.trust{grid-template-columns:1fr}}
+  .trust > div{padding:1.7rem 1.7rem 1.7rem 0; border-bottom:1px solid var(--hair)}
+  .trust > div:nth-child(odd){padding-right:2.4rem}
+  .trust h3{font-size:1.12rem; display:flex; gap:.6rem; align-items:baseline}
+  .trust h3 .d{width:7px; height:7px; background:var(--ok); border-radius:50%; flex:none; transform:translateY(-1px)}
+  .trust p{margin-top:.5rem; color:var(--muted); font-size:.95rem}
+
+  /* access */
+  .access{background:var(--ink-deep); border-top:1px solid var(--hair)}
+  .access-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:clamp(2rem,4vw,4rem); align-items:center}
+  @media (max-width:860px){.access-grid{grid-template-columns:1fr}}
+  .form{background:var(--raise); border:1px solid var(--hair); padding:1.8rem; border-radius:3px}
+  .form label{display:block; font-size:.8rem; color:var(--muted); margin:1rem 0 .35rem; font-family:var(--mono); letter-spacing:.04em}
+  .form label:first-of-type{margin-top:0}
+  .form input,.form select{width:100%; background:var(--ink); border:1px solid var(--hair); color:var(--bone);
+    font-family:var(--sans); font-size:.98rem; padding:.7rem .8rem; border-radius:2px; transition:border-color .25s}
+  .form input:focus,.form select:focus{outline:none; border-color:var(--signal)}
+  .form .btn{width:100%; justify-content:center; margin-top:1.3rem}
+  .form .note{margin-top:.9rem; font-size:.74rem; color:var(--faint); line-height:1.6}
+
+  /* faq */
+  .faq{margin-top:2.4rem; border-top:1px solid var(--hair)}
+  details{border-bottom:1px solid var(--hair)}
+  summary{list-style:none; cursor:pointer; padding:1.2rem 0; display:flex; justify-content:space-between; gap:1rem; align-items:center;
+    font-family:var(--disp); font-weight:600; font-size:1.08rem; letter-spacing:-.01em}
+  summary::-webkit-details-marker{display:none}
+  summary .pl-ic{flex:none; width:18px; height:18px; position:relative; transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  summary .pl-ic::before,summary .pl-ic::after{content:""; position:absolute; background:var(--signal); inset:0; margin:auto}
+  summary .pl-ic::before{width:100%; height:1.5px}
+  summary .pl-ic::after{height:100%; width:1.5px}
+  details[open] summary .pl-ic{transform:rotate(135deg)}
+  details .ans{padding:0 0 1.3rem; color:var(--muted); max-width:64ch; font-size:.98rem}
+
+  /* footer */
+  footer{border-top:1px solid var(--hair); background:var(--ink-deep); padding-block:clamp(2.4rem,4vw,3.6rem); font-size:.85rem}
+  .foot-top{display:flex; justify-content:space-between; gap:2rem; flex-wrap:wrap; align-items:flex-start}
+  .foot-links{display:flex; gap:2rem; flex-wrap:wrap}
+  .foot-links a{color:var(--muted)}
+  .foot-links a:hover{color:var(--bone)}
+  .disclosure{margin-top:2rem; padding-top:1.6rem; border-top:1px solid var(--hair); color:var(--faint); font-size:.78rem; line-height:1.8; max-width:none}
+  .disclosure b{color:var(--muted); font-weight:600}
+  .reg-row{margin-top:1.2rem; display:flex; gap:1.4rem 2.2rem; flex-wrap:wrap; font-family:var(--mono); font-size:.74rem; color:var(--faint)}
+  .reg-row span b{color:var(--bone); font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" aria-label="Arrow home">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M3 19 L19 3 M19 3 H9 M19 3 V13" stroke="oklch(0.69 0.193 36)" stroke-width="2" stroke-linecap="square"/>
+      </svg>
+      ARROW
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#cloud">Algo Cloud</a>
+      <a href="#why">Why Arrow</a>
+      <a href="#trust">Trust</a>
+      <a href="#faq">FAQ</a>
+      <a class="navcta btn ghost" href="#access" style="padding:.5rem .95rem">Request access</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="h1">
+    <canvas id="sig" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker rv">A product of iRage</span>
+          <h1 class="h1 rv" id="h1" style="margin-top:1.1rem">The trading desk of an <span class="sig">HFT firm</span>, opened to serious capital.</h1>
+          <p class="lede rv">Arrow brings iRage's institutional algorithmic execution to big-ticket traders as a governed, broker-hosted Algo Cloud, run inside your own NSE, BSE and MCX account. You keep custody. You keep control. We never promise returns.</p>
+          <div class="hero-cta rv">
+            <a class="btn" href="#access">Request access</a>
+            <a class="btn ghost" href="#cloud">See how the Algo Cloud works</a>
+          </div>
+        </div>
+        <aside class="hero-side rv" aria-label="At a glance">
+          <div class="line"><span class="k">Backed by</span><span class="v">iRage, a domestic HFT firm</span></div>
+          <div class="line"><span class="k">Markets</span><span class="v">NSE · BSE · MCX</span></div>
+          <div class="line"><span class="k">Your assets</span><span class="v">In your own account</span></div>
+          <div class="line"><span class="k">Access</span><span class="v">By invitation</span></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDIBILITY STRIP -->
+  <div class="strip">
+    <div class="wrap">
+      <div class="item"><b>iRage Broking Services LLP</b></div>
+      <div class="item">SEBI Stock Broker <span class="reg">INZ000011262</span></div>
+      <div class="item">SEBI Research Analyst <span class="reg">INH000025425</span></div>
+      <div class="item">Designated market maker, NSE</div>
+    </div>
+  </div>
+
+  <!-- WHO -->
+  <section id="who">
+    <div class="wrap">
+      <div class="seclabel rv"><span class="num">01</span><span class="nm">Who it is for</span></div>
+      <h2 class="h2 rv">Built for capital that has outgrown the retail app.</h2>
+      <p class="sec-lede rv">Arrow is not for the ₹20-a-trade crowd. It is for people who already deploy serious size, trade with intent, and need institutional capability they cannot assemble alone.</p>
+      <div class="who">
+        <div class="rv"><div class="cap">₹20L – 1cr</div><h3>HNI traders</h3><p>Active option buyers and sellers who want better execution, true cost, and margin efficiency, not another discount toggle.</p></div>
+        <div class="rv"><div class="cap">₹1cr +</div><h3>UHNI &amp; family offices</h3><p>Allocators who require governance, capacity transparency, conflict clarity, and a named desk before they commit.</p></div>
+        <div class="rv"><div class="cap">Verified track record</div><h3>Professional traders</h3><p>High-frequency and systematic operators who feel every basis point of slippage, latency, and friction.</p></div>
+        <div class="rv"><div class="cap">Desk &amp; treasury</div><h3>Small institutions</h3><p>Prop-style and treasury workflows that need audit trails, maker-checker controls, and policy limits.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALGO CLOUD -->
+  <section class="cloud" id="cloud">
+    <div class="wrap">
+      <div class="seclabel rv"><span class="num">02</span><span class="nm">The Algo Cloud</span></div>
+      <h2 class="h2 rv">Institutional strategies, pre-registered by us, run inside your account.</h2>
+      <p class="sec-lede rv">iRage operates automated strategies at market-making scale. Arrow makes a governed catalogue of them available to eligible clients. Arrow registers each strategy with the exchanges and carries the compliance. You subscribe, set your limits, and the strategy executes in your own account. You are never asked to file a registration, run a server, or hand over your funds.</p>
+      <div class="steps">
+        <div class="step rv">
+          <div class="n">01</div><h3>Choose from the catalogue</h3>
+          <p>Strategies are organised by instrument, holding period and risk profile. Never by performance, because the rules do not allow it, and because we do not sell outcomes.</p>
+          <div class="tick">Pre-registered · exchange-tagged</div>
+        </div>
+        <div class="step rv">
+          <div class="n">02</div><h3>It runs in your account</h3>
+          <p>Execution happens inside your own Arrow account on broker-native infrastructure. No pooling, no discretionary mandate, no third-party server holding your keys.</p>
+          <div class="tick">Your custody · your control</div>
+        </div>
+        <div class="step rv">
+          <div class="n">03</div><h3>You hold the kill switch</h3>
+          <p>Per-strategy and account-level caps, hard risk limits, capacity ceilings, and an instant kill switch. Pause or withdraw at any time.</p>
+          <div class="tick">Capacity-capped · always reversible</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY / PILLARS -->
+  <section id="why">
+    <div class="wrap">
+      <div class="seclabel rv"><span class="num">03</span><span class="nm">Why Arrow</span></div>
+      <h2 class="h2 rv">The capability you cannot buy as a subscription.</h2>
+      <p class="sec-lede rv">APIs, no-code tools and analytics are cheap and everywhere. None of them gives you a vetted, capacity-managed, exchange-registered strategy desk running in your own account, with a firm that actually trades these markets standing behind it.</p>
+      <div class="pillars">
+        <div class="plist">
+          <div class="pl rv"><span class="idx">01</span><div><h3>iRage lineage</h3><p>Strategy and execution design informed by a firm that runs automated markets and provides liquidity every session.</p></div></div>
+          <div class="pl rv"><span class="idx">02</span><div><h3>Broker-native execution</h3><p>Orders run on our own risk and audit stack, not a fragile chain of third-party keys and rented servers.</p></div></div>
+          <div class="pl rv"><span class="idx">03</span><div><h3>Capacity discipline</h3><p>Every strategy has a published capacity state. When it is full, it closes. We will not crowd you into a thinning edge.</p></div></div>
+          <div class="pl rv"><span class="idx">04</span><div><h3>Transparent cost</h3><p>Brokerage, statutory charges, pledge, interest and slippage, attributed per strategy. No surprises in the ledger.</p></div></div>
+          <div class="pl rv"><span class="idx">05</span><div><h3>Your account, your control</h3><p>This is not portfolio management. Your funds and securities stay yours. You can switch everything off in one tap.</p></div></div>
+          <div class="pl rv"><span class="idx">06</span><div><h3>A named desk</h3><p>Market-hours specialists who understand orders, margin and exchange states. Not a ticket queue, not a chatbot.</p></div></div>
+        </div>
+        <div class="pcard rv">
+          <span class="kicker">The honest part</span>
+          <div class="big">We will never hand you the prop desk's core edge, and we will never pretend otherwise.</div>
+          <p class="small">What we share is a ladder of strategies whose value does not depend on nanosecond exclusivity, run with honest capacity limits. A serious trader trusts the firm that says this plainly.</p>
+          <div class="barrier">// information barriers<br/><b>Prop and client flow are separated.</b> We do not trade ahead of your orders. Conflicts are disclosed, governed and surveilled.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMISE -->
+  <section class="promise" id="promise">
+    <div class="wrap">
+      <h2 class="big rv">Precision, <em>not promises.</em></h2>
+      <p class="rv">Every other algo pitch you have seen leads with a number: a return, a win rate, a backtested curve. We lead with the opposite. Indian rules forbid brokers from claiming algo returns, and ninety-one percent of individual derivatives traders lose money. So we sell what is real: governed execution, visible cost, hard risk limits, capacity honesty, and a firm that stands behind the system. The discipline is the product.</p>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section id="trust">
+    <div class="wrap">
+      <div class="seclabel rv"><span class="num">04</span><span class="nm">Trust &amp; transparency</span></div>
+      <h2 class="h2 rv">At crore scale, trust is the whole product.</h2>
+      <p class="sec-lede rv">The bigger the account, the more the questions change from "is the app nice" to "can I rely on this firm under stress." Here are our answers, before you ask.</p>
+      <div class="trust">
+        <div class="rv"><h3><span class="d"></span>You keep custody</h3><p>Funds and securities stay in your own account. We execute; we never hold or pool your capital. This is a brokerage facility, not a managed fund.</p></div>
+        <div class="rv"><h3><span class="d"></span>We do not trade against you</h3><p>Hard information barriers separate the proprietary desk from client flow, with no order-ahead access and active surveillance.</p></div>
+        <div class="rv"><h3><span class="d"></span>No returns, ever promised</h3><p>No performance claims, no leaderboards, no profit screenshots. We show controls, capacity, and your own post-trade reporting.</p></div>
+        <div class="rv"><h3><span class="d"></span>Reconciled and reported</h3><p>Clean ledgers, contract-note reconciliation, and CA-ready tax reporting built for high-volume derivatives accounts.</p></div>
+        <div class="rv"><h3><span class="d"></span>Built to stay up</h3><p>Redundant execution paths, a market-hours dealer bridge, and written incident reviews when something does break.</p></div>
+        <div class="rv"><h3><span class="d"></span>Suitability first</h3><p>Eligibility, loss-capacity and risk acceptance are checked before activation. There are no growth-hack exceptions.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS -->
+  <section class="access" id="access">
+    <div class="wrap">
+      <div class="access-grid">
+        <div>
+          <div class="seclabel rv"><span class="num">05</span><span class="nm">Access</span></div>
+          <h2 class="h2 rv">Arrow is by invitation.</h2>
+          <p class="sec-lede rv">We onboard a limited number of serious traders and allocators at a time, through a confidential consultation. Tell us a little about how you trade, and the desk will reach out.</p>
+          <p class="rv mono" style="margin-top:1.6rem; font-size:.8rem; color:var(--faint); letter-spacing:.04em; line-height:1.9">No obligation · No sales calls · No spam<br/>Your details are used only to assess fit.</p>
+        </div>
+        <form class="form rv" onsubmit="return arrowSubmit(event)">
+          <label for="nm">Name</label>
+          <input id="nm" name="name" required autocomplete="name" placeholder="Your name" />
+          <label for="em">Work or personal email</label>
+          <input id="em" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+          <label for="cap">Approximate trading capital</label>
+          <select id="cap" name="capital" required>
+            <option value="" selected disabled>Select a band</option>
+            <option>Under ₹20 lakh</option>
+            <option>₹20 lakh – ₹1 crore</option>
+            <option>₹1 crore – ₹5 crore</option>
+            <option>Over ₹5 crore</option>
+            <option>Institution / family office</option>
+          </select>
+          <button class="btn" type="submit">Request a confidential consultation</button>
+          <p class="note" id="formnote">Submitting confirms you have read the risk disclosures below. Derivatives trading carries a high risk of loss. No returns are promised or represented.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="seclabel rv"><span class="num">06</span><span class="nm">Questions</span></div>
+      <h2 class="h2 rv">The questions serious people actually ask.</h2>
+      <div class="faq rv">
+        <details><summary>What returns can I expect?<span class="pl-ic" aria-hidden="true"></span></summary><div class="ans">None are promised or represented, and that is deliberate. SEBI rules prohibit brokers from referencing past or expected algo performance, and most individual derivatives traders lose money. We sell governed access, execution quality, transparent cost and hard risk controls. Any firm leading with a return number is one to be careful with.</div></details>
+        <details><summary>Is this portfolio management or a fund?<span class="pl-ic" aria-hidden="true"></span></summary><div class="ans">No. It is not PMS, not an AIF, and not pooled. Strategies run inside your own broking account. Your funds and securities remain in your name and custody, and you can pause or stop any strategy yourself, at any time.</div></details>
+        <details><summary>Do I need to register my algorithms with SEBI?<span class="pl-ic" aria-hidden="true"></span></summary><div class="ans">No. Arrow registers each catalogue strategy with the exchanges and carries the compliance as the broker. You subscribe to strategies that are already approved and tagged. You never file a registration, run a static IP, or operate a server.</div></details>
+        <details><summary>iRage runs proprietary trading. Will you trade against me?<span class="pl-ic" aria-hidden="true"></span></summary><div class="ans">No. Hard information barriers separate the proprietary desk from client operations. The desk has no access to client orders ahead of execution, conflicts are formally disclosed, and trading-ahead surveillance is active. We treat this as the most important promise we make.</div></details>
+        <details><summary>What does it cost?<span class="pl-ic" aria-hidden="true"></span></summary><div class="ans">Pricing is built around access, governance and service: a membership, capacity-based strategy access, and brokerage, with every charge disclosed up front. There are no performance fees and no profit share, because we do not price against outcomes. The desk will walk you through the exact numbers during your consultation.</div></details>
+        <details><summary>Who is behind Arrow?<span class="pl-ic" aria-hidden="true"></span></summary><div class="ans">Arrow is a product of iRage, an Indian high-frequency trading firm that provides liquidity across NSE, BSE and MCX. The broking entity, iRage Broking Services LLP, holds SEBI stock-broker registration INZ000011262 and Research Analyst registration INH000025425.</div></details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="#top" aria-label="Arrow">
+        <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 19 L19 3 M19 3 H9 M19 3 V13" stroke="oklch(0.69 0.193 36)" stroke-width="2" stroke-linecap="square"/></svg>
+        ARROW
+      </a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#cloud">Algo Cloud</a>
+        <a href="#why">Why Arrow</a>
+        <a href="#trust">Trust</a>
+        <a href="#access">Request access</a>
+        <a href="https://javajack.github.io/arrow-trade/elite/">Strategy docs</a>
+      </nav>
+    </div>
+    <div class="reg-row">
+      <span><b>iRage Broking Services LLP</b></span>
+      <span>SEBI Broker <b>INZ000011262</b></span>
+      <span>SEBI Research Analyst <b>INH000025425</b></span>
+      <span>Members: <b>NSE · BSE · MCX</b></span>
+    </div>
+    <p class="disclosure">
+      <b>Risk disclosure.</b> Investments in securities and derivatives are subject to market risks. Read all related documents carefully before investing. Derivatives carry a high risk of loss, and a SEBI study found that roughly 9 out of 10 individual traders in equity derivatives incurred net losses. Algorithmic strategies can and do lose money, and may be paused or stopped by risk controls. <b>No returns are promised or represented, and nothing on this page is a recommendation, an assurance of profit, or a guarantee of performance.</b> Brokerage and other charges apply. Strategy capacity is limited and access is subject to eligibility and suitability checks. Arrow Elite is a broker-executed strategy facility in the client's own account; it is not portfolio management, not a pooled investment, and not an assured-return product. This page is informational and does not constitute investment advice. <b>This is a concept and strategy site for a planned product; figures and features are illustrative and subject to regulatory approval and change.</b>
+    </p>
+    <p class="disclosure" style="border-top:none; padding-top:.4rem">© <span id="yr"></span> Arrow · a product of iRage. For grievances, the registered intermediary's investor charter, complaint status and SEBI SCORES / SMART ODR channels apply.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // nav border on scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 12), {passive:true});
+
+  // reveal on scroll
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e,i) => { if(e.isIntersecting){ e.target.style.transitionDelay = Math.min(i*40,160)+'ms'; e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  function arrowSubmit(e){
+    e.preventDefault();
+    const f = e.target, note = document.getElementById('formnote');
+    note.innerHTML = '<b style="color:oklch(0.78 0.11 150)">Received.</b> The desk will reach out from an iRage address. Thank you.';
+    f.querySelector('button').textContent = 'Request received';
+    f.querySelector('button').disabled = true;
+    return false;
+  }
+
+  // hero signal canvas: abstract tick lattice + a precise vector sweep (NOT a P&L chart)
+  (function(){
+    const c = document.getElementById('sig'); if(!c) return;
+    const ctx = c.getContext('2d');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let w,h,dpr,t=0;
+    function size(){ dpr=Math.min(devicePixelRatio||1,2); w=c.clientWidth; h=c.clientHeight; c.width=w*dpr; c.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+    const SIG='oklch(0.69 0.193 36)';
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      // faint tick lattice
+      const gap=46; ctx.lineWidth=1;
+      ctx.strokeStyle='oklch(0.30 0.008 66 / 0.5)';
+      for(let x=(t*0.25%gap); x<w; x+=gap){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+      // animated ticks of varying height along a baseline (abstract market microstructure, no trend)
+      const base=h*0.62;
+      for(let x=20, i=0; x<w; x+=14, i++){
+        const seed=Math.sin(i*1.3 + t*0.018)*Math.cos(i*0.7 - t*0.01);
+        const len=6+Math.abs(seed)*26;
+        const on=(Math.sin(i*0.9 - t*0.03)>0.55);
+        ctx.strokeStyle = on ? 'oklch(0.69 0.193 36 / 0.55)' : 'oklch(0.50 0.012 72 / 0.35)';
+        ctx.lineWidth = on?1.4:1;
+        ctx.beginPath(); ctx.moveTo(x, base-len*0.5); ctx.lineTo(x, base+len*0.5); ctx.stroke();
+      }
+      // one precise vector arrow sweeping left-to-right at a fixed angle (the "arrow", not a return curve)
+      const sweep=( (t*1.1) % (w+260) ) - 130;
+      const ax=sweep, ay=h*0.30, bx=sweep+150, by=h*0.30-58;
+      ctx.strokeStyle=SIG; ctx.lineWidth=2; ctx.lineCap='square';
+      ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+      // arrowhead
+      ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx-15,by+3); ctx.moveTo(bx,by); ctx.lineTo(bx-4,by+15); ctx.stroke();
+      t+=1;
+      if(!reduce) requestAnimationFrame(draw);
+    }
+    size(); addEventListener('resize', size, {passive:true});
+    if(reduce){ draw(); } else { requestAnimationFrame(draw); }
+  })();
+</script>
+</body>
+</html>
