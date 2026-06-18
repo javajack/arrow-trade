@@ -1,0 +1,94 @@
+---
+title: "Arrow Algo Cloud — The Product"
+description: "The 100+ pre-registered iRage-derived strategy catalogue that runs in the client's own account with zero registration burden — its architecture, capacity discipline, risk controls and compliant quality display."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+import Mermaid from '../../../components/Mermaid.astro';
+
+The product is a **broker-hosted strategy catalogue**: Arrow/iRage builds and pre-registers a library of strategies with the exchanges; an eligible client browses, subscribes, sets risk caps, and the strategy executes **in the client's own Arrow account**. The client never files a SEBI strategy registration, never runs a VPS, never manages a static IP. That turnkey experience is the entire value — and it is only legal because of iRage's broker + RA registrations ([regulatory page](/elite/regulatory-and-trust/)).
+
+## The core mechanic: broker pre-registers once, clients subscribe
+
+<Mermaid title="Zero client registration burden — Arrow absorbs the compliance" chart={`flowchart LR
+    subgraph ARROW["Arrow / iRage does this once per strategy"]
+      A["iRage builds strategy\n(white-box or black-box)"] --> B["RA research dossier\n(black-box) + risk design"]
+      B --> C["Exchange registration\n→ unique algo ID"]
+      C --> D["Capacity ledger\n+ risk controls set"]
+    end
+    D --> E["Catalogue listing\n(category, risk, capacity, scope)"]
+    E --> F["Client subscribes,\nsets caps, consents"]
+    F --> G["Executes in client's OWN\nAccount · algo-ID tagged"]
+    G --> H["Client controls: pause,\nkill, withdraw anytime"]
+`} />
+
+Under the SEBI framework, a **broker-generated, exchange-registered algo** can be used by clients without their own strategy registration — the client-side registration burden only applies to *self-developed* algos above the 10-OPS threshold ([validated in detail](/elite/regulatory-and-trust/)). Arrow does the filing, the RA dossier, the change-control and the capacity management; the client gets institutional automation as a subscription.
+
+<Aside type="caution" title="'100+ strategies' is an operations commitment, not a toggle">
+Each strategy needs its own exchange permission, a black-box RA research report, version control, and **fresh registration on any logic change**. A catalogue of 100+ is therefore a standing compliance-operations function, not a product menu. The number is a promise about Arrow's ops capacity as much as about client choice — budget for it.
+</Aside>
+
+## What the catalogue contains (categorized by behaviour, never by returns)
+
+| Category | Examples | Box type | Who it serves |
+|---|---|---|---|
+| **Execution algos** | TWAP/VWAP, participation, order slicing, hedged execution | White-box (logic disclosed) | Anyone trading size; easiest to register/explain |
+| **Medium-frequency systematic** | Seconds-to-minutes options/stat-arb variants, capacity-capped | Black-box (RA-governed) | Pros, HNI, UHNI allocations |
+| **Risk overlays** | Auto-hedging, delta/gamma management, stop orchestration, expiry guardrails | Mixed | Option sellers, family offices |
+| **Discretionary power tools** | One-tap/chart trading, trailing SL, basket/iceberg, emergency flatten | White-box | HNI discretionary traders, supertraders |
+
+Crucially, the catalogue is organized by **instrument, holding period, automation type and risk-control profile** — never by performance, because [SEBI bans return/ranking claims](/elite/regulatory-and-trust/). There is no leaderboard. There is no "top strategy." There is a governed menu with honest risk and capacity labels.
+
+<Aside type="note" title="Why iRage would share strategies at all (the alpha-decay honesty)">
+iRage will not hand clients its core latency-arbitrage edge — that decays the instant it is crowded, and a rational firm keeps it prop. What is genuinely shareable is the *ladder of strategies whose edge does not depend on nanosecond exclusivity*: execution algos, medium-frequency systematic variants, risk overlays, and decayed-but-still-useful prop research run with honest capacity caps. The honest claim is **"iRage's experience in automated markets informs a broker-registered, capacity-capped catalogue"** — not "we give you the prop desk's alpha." Stating this plainly is what keeps the product credible to sophisticated clients who know how capacity works.
+</Aside>
+
+## Capacity discipline (the feature competitors hide)
+
+For big money, "strategy available" is meaningless without "is it open, near capacity, or crowded?" Arrow Elite makes capacity a first-class, visible product surface:
+
+| Control | Implementation |
+|---|---|
+| Capacity ledger | Per strategy by exchange/segment/symbol/expiry/time-bucket — in max lots, max notional, max participation rate, max concurrent accounts (not just AUM) |
+| Per-client allocation cap | Each client's max capital/notional/lots in a strategy, set by liquidity, risk grade and current aggregate subscription |
+| Capacity states (shown to client) | **Open · Limited · Waitlist · Closed-to-new-capital · Reduce-only · Paused · Retired** |
+| Fill fairness | Deterministic allocation when many clients trigger the same order (pro-rata / time-sliced); no undisclosed priority |
+| Decay monitoring | Track slippage-vs-model, reject rate, book-impact, hit ratio after costs, correlation with aggregate subscribed capital → pause/retire on breach |
+
+## Risk, control and the client-owned-account promise
+
+The single biggest trust differentiator: **the client keeps custody and control.** This is not PMS — there is no pooling, no discretionary mandate, no transfer of funds. The client can pause or kill any strategy and withdraw anytime.
+
+| Layer | Control surface |
+|---|---|
+| Account | Total exposure, margin, cash/collateral split, withdrawal-safe cash, account-level kill switch |
+| Strategy | Capital allocation, max drawdown halt, max slippage, order-reject ceiling, per-strategy kill switch |
+| Instrument | Net Greeks, symbol/expiry concentration caps |
+| Infra | Latency ledger, feed health, postback/sequence integrity, broker-controlled static egress |
+| Human | Named market-hours desk, incident bridge, written RCA |
+
+## Compliant quality display (no returns, ever)
+
+The hard question every big-ticket prospect asks — *"what do these make?"* — cannot be answered with numbers. Here is what Arrow shows **instead**, and it is enough for a sophisticated diligence:
+
+| Allowed | Banned |
+|---|---|
+| Strategy mechanism & category; instrument/segment scope | CAGR, monthly/expected return, backtested return headlines |
+| Risk controls, capacity state, liquidity filters | "Top performer", star ratings, creator leaderboards by return |
+| Operational metrics: uptime, reject rate, measured latency, halt counts | "HFT alpha for retail", profit screenshots as marketing |
+| The client's **own** realized post-trade reporting (account statement, not marketing) | Implying expected profit in any pre-sale material |
+| Backtest *methodology, assumptions, limitations* inside the RA dossier | Backtest *performance* in client-facing/marketing copy |
+
+A **paper / live-shadow trial** lets a prospect watch a strategy operate on live data — with realistic slippage, rejects and MPP behaviour — before committing capital. That substitutes *demonstrated operation* for *promised returns*, which is both compliant and more convincing to a pro than any backtest chart.
+
+## What the client experience collapses to
+
+| Before Arrow Elite (DIY) | With Arrow Elite |
+|---|---|
+| Build strategy, find auditor, file registration, wait T+10 | Browse catalogue, subscribe to a pre-registered strategy |
+| Rent VPS, configure static IP, manage tokens daily | Broker-hosted; static IP and sessions handled by construction |
+| Stitch analytics + execution + journal + tax | One cockpit: execution, risk, journal, CA-ready reporting |
+| Pray during outages | Named desk, redundant path, RCA, kill switch |
+| Guess at capacity | Visible capacity state and per-client caps |
+
+This is the [fragmentation, registration and fragility pains](/elite/big-ticket-segment/) collapsed into a subscription — the reason a serious trader pays for it rather than building it.

@@ -1,0 +1,66 @@
+---
+title: "Pre-Mortem (Elite) — How This Tier Fails"
+description: "The disciplined bear case for Arrow Elite: the conflict-of-interest that flows from the iRage structure, alpha-decay, regulatory classification drift, and the other ways the big-ticket algo tier dies — each with early-warning signals."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+Assume it is two years later and Arrow Elite has failed. What most likely killed it? Naming the failure modes with **early-warning signals** is how the team sees them coming. Ordered by a blend of likelihood and lethality. This complements docs1's [general pre-mortem](/viability/pre-mortem/); the items here are specific to the big-ticket Algo Cloud tier.
+
+## 1. Broker × HFT-prop conflict detonates <Badge text="Existential" variant="danger" />
+
+The differentiator and the kill-risk are the same fact: iRage runs proprietary HFT/market-making *and* Arrow distributes strategies to clients. The failure: a regulator finding, a journalist's "your HFT broker trades against you" framing, or a single front-running incident — any of which can block the licence path or destroy the [crore-scale trust](/elite/regulatory-and-trust/) the whole tier depends on. SEBI's NSE co-location history means scrutiny here is a near-certainty, not a tail risk.
+
+**Mitigation (must be designed in, not bolted on):** hard information barriers; a public, auditable **no-prop-priority** guarantee; client-order-flow segregation; trade-ahead surveillance; board oversight; proactive disclosure. **Early warning:** regulator questions clustering on infra fairness during onboarding; any internal request for prop access to client flow; community speculation about the iRage relationship.
+
+## 2. Alpha decay / capacity blowup <Badge text="High" variant="danger" />
+
+The catalogue's credibility dies if subscribed strategies visibly degrade — and crowdable edges *will* degrade as capital follows them. If Arrow over-subscribes a strategy, or markets one whose edge depends on exclusivity, clients experience decay as "the product stopped working," and word spreads fast in the tight communities Arrow recruited from.
+
+**Mitigation:** the [hard capacity ledger and decay monitoring](/elite/algo-cloud/) — per-strategy caps, per-client allocation limits, close-to-new-capital states, retire-on-breach; and the honest "we don't hand you prop alpha" framing. **Early warning:** slippage-vs-model widening; reject-rate climbing; hit-ratio-after-costs falling as subscribed capital rises; any strategy left "Open" past its capacity ceiling.
+
+## 3. Regulatory classification drift <Badge text="High" variant="danger" />
+
+The product sits one bad design decision away from three reclassifications: a black-box strategy that looks like unlicensed *advice*; a discretionary toggle that looks like *portfolio management* (PMS/AIF); or quality display that looks like a *return claim*. Any of these turns a compliant broker facility into an enforcement target.
+
+**Mitigation:** RA dossier per black-box algo; strictly client-owned accounts with client-set caps (no pooling, no discretion); zero return/ranking claims; legal review of *every* activation flow and marketing surface. **Early warning:** marketing copy creeping toward performance language; product proposing "auto-allocate across strategies for the client"; sales decks with backtested returns.
+
+## 4. The catalogue ops bottleneck <Badge text="Medium-high" variant="caution" />
+
+"100+ strategies" is a standing compliance-operations commitment, not a menu: each needs exchange permission, an RA research report, version control, and **fresh registration on every logic change** ([regulatory detail](/elite/regulatory-and-trust/)). If registration/change-control can't keep pace, the catalogue either stalls (no new/updated strategies) or someone ships an unfiled change — a compliance breach.
+
+**Mitigation:** a real strategy-registration ops function with SLA; a change-classification matrix (parameter vs logic); a registration inventory with version/algo-ID/approval tracking. **Early warning:** strategy backlog growing; change requests waiting on filing; any "we'll file it later" shortcut.
+
+## 5. Operational liability at crore scale <Badge text="Medium-high" variant="caution" />
+
+Broker-native execution means Arrow *owns* every outage, reject, bad state transition and complaint — and at crore scale a single mishandled incident is reputationally catastrophic and financially material (the [₹5cr-withdrawal-style](/elite/big-ticket-segment/) public blowup). Discount brokers survive outages; a premium, reliability-branded tier suffers disproportionately from them.
+
+**Mitigation:** SRE discipline, redundant execution path, market-hours dealer bridge, status page, incident RCA, pre-defined compensation matrix, named desk. **Early warning:** load tests short of open-storm concurrency; no incident runbook before launch; rising market-hours support severity.
+
+## 6. Return-claim pressure from clients <Badge text="Medium" variant="caution" />
+
+Every prospect asks "what do these make?" The commercial temptation to answer — with a backtest, a screenshot, a "typical client" number — is constant, and a single salesperson crossing the line creates a [2022-circular](/elite/regulatory-and-trust/) violation.
+
+**Mitigation:** a compliance copy bank; sell controls/capacity/operational metrics and the client's own post-trade reporting; paper/live-shadow trials instead of return numbers; script review for every channel and finfluencer. **Early warning:** sales asking for "just one performance number to close"; affiliate content showing P&L.
+
+## 7. Pricing disbelief / wrong comparison <Badge text="Medium" variant="caution" />
+
+If prospects compare Elite to a ₹9,000/mo SaaS, a premium fee looks absurd and the funnel stalls. The failure is positioning, not price: Elite replaces *building an in-house quant desk*, not a Tradetron subscription.
+
+**Mitigation:** price against service/governance/minimum-capital with tangible inclusions; anchor to the cost of DIY (registration, VPS, dev/SRE time, fragmented tools, incident risk). **Early warning:** win/loss citing "cheaper tools exist"; low membership conversion despite high audit-call interest.
+
+## Pre-mortem summary
+
+| Failure mode | Lethality | Primary early-warning signal |
+|---|---|---|
+| Broker × prop conflict | **Existential** | Regulator infra-fairness scrutiny; prop requests for client flow |
+| Alpha decay / capacity blowup | High | Slippage-vs-model widening as subscribed capital rises |
+| Regulatory classification drift | High | Marketing creeping to performance; auto-allocation proposals |
+| Catalogue ops bottleneck | Medium-high | Registration/change-control backlog |
+| Operational liability | Medium-high | Load tests short of open-storm concurrency |
+| Return-claim pressure | Medium | Sales asking for "one number"; affiliate P&L |
+| Pricing disbelief | Medium | Win/loss citing cheaper tools |
+
+<Aside type="note" title="The throughline">
+Five of these seven failures are the *same discipline* failing in different places: the moment Arrow Elite implies returns, shares prop alpha, hides capacity, or lets prop see client flow, it loses both its legal footing and the institutional credibility that lets it charge a premium. For this tier, **compliance discipline and commercial strategy are the same thing** — which is unusual, and is exactly why an HFT firm with an RA licence and the patience to do it properly is the rare entity that can pull it off.
+</Aside>

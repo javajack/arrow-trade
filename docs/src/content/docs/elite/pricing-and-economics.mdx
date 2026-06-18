@@ -1,0 +1,70 @@
+---
+title: "Pricing, Economics & Moat"
+description: "Why Elite prices against the scarce regulated bundle (not APIs), the compliant price shapes, the high-ARPU unit economics that dissolve docs1's LTV paradox, and the iRage-IP moat with its capacity limits."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+## Price against the scarce bundle, never the commodity
+
+The commodity layers Arrow Elite is *not* selling are already cheap or free. Anchoring to them would destroy the model:
+
+| Layer | Public price anchor | Lesson |
+|---|---|---|
+| Broker API | Free (Kite Personal, DhanHQ, Fyers) – ₹500/mo (Kite Connect) | Don't charge premium for basic order APIs |
+| No-code/strategy SaaS | ₹0–₹9,000/mo (Tradetron); AlgoTest RA-Algo ~₹1,500/mo | The visible ceiling for *self-serve* tooling |
+| Static IP / managed runtime | ~₹849/mo (AlgoTest VEE); AWS Lightsail ~$5/mo | Bundle it; it's a real but small hidden cost |
+| Discount brokerage | ₹20/order (Upstox Plus to ₹30) | Premium brokerage must include service, not just price |
+| HNI quant reference | Wright PMS ₹50L+ ticket | Use a **minimum-capital eligibility** threshold, not a PMS structure |
+
+The scarce, regulated things Arrow Elite *is* selling have **no public like-for-like competitor** ([competitive research](/elite/pricing-and-economics/) sources in `research/19`): iRage-informed strategy IP, broker pre-registration, broker-native execution, capacity governance, and HNI white-glove. That bundle commands a premium — but only if priced as service/governance/access, never as returns.
+
+## Compliant price shapes (no return-linked fees, ever)
+
+| Model | How it works | Why it fits | Watch-out |
+|---|---|---|---|
+| **Elite membership** | ₹X/month or /year for the desk, managed runtime, risk cockpit, tax/audit reporting and catalogue access | Clean, predictable, not return-linked | Must be valuable even when strategies are paused |
+| **Per-strategy subscription** | Fixed fee per activated registered strategy, tiered by capacity bucket/support | Aligns price with scarce strategy slots | Needs capacity disclosure; no return implication |
+| **Capital-tiered platform fee** | Bands by allocated capital (≤₹25L / ₹25L–1cr / ₹1cr+) | Matches service & risk cost to size | Must avoid PMS/AIF optics — client keeps account ownership |
+| **Infra/compliance pass-through** | Explicit line items: exchange registration, audit/cert, managed hosting, data feeds | Transparent and defensible | Confirm exact exchange fees before quoting |
+| **Capacity reservation fee** | Pay to reserve limited capacity in a strategy, independent of return | Honest scarcity pricing | Careful wording — no profit expectation |
+
+**Forbidden by design:** performance fees, profit share, guaranteed payouts, capital-protection claims, "expected return" tiers. Each would pull the product into PMS/AIF/advisory/mis-selling territory and contradict the [client-owned, no-returns posture](/elite/regulatory-and-trust/).
+
+<Aside type="tip" title="The pricing one-liner">
+Charge for the desk, the governance, the managed runtime and capacity access — the things that are hard and regulated. Never charge for, or price against, performance. A ₹1cr client paying a meaningful membership + capacity + brokerage for governed institutional capability is a rational, defensible transaction; the same client paying a "profit share" is a regulatory problem.
+</Aside>
+
+## Unit economics: high-ARPU, low-volume — the inversion that fixes docs1
+
+[docs1's economics page](/viability/economics-ltv-paradox/) showed mass F&O retail is a churning, loss-making, self-liquidating base. Elite is the opposite shape, and that is the point:
+
+| Dimension | docs1 mass retail | Arrow Elite |
+|---|---|---|
+| Client count | Hundreds of thousands, churning | Hundreds–low thousands, sticky |
+| ARPU | Low, frequency-dependent on losers | High: membership + capacity + brokerage on real capital |
+| Revenue resilience | Collapses in price wars / F&O curbs | Asset- and service-based; far less curb-exposed |
+| CAC | Inflating in a saturated market | Targeted, signal-led, concierge ([GTM](/elite/finding-the-whales/)) |
+| Retention | Quits on losing | Stays for capability + service + switching cost of integration |
+| Cost base | Heavy infra build from zero | **iRage infra amortized** ([HFT edge](/viability/hft-edge-and-limits/)) |
+
+The model closes when membership + capacity + brokerage from a few hundred serious relationships clears a cost base whose largest line (reliable trading infra) is shared with iRage. The number to govern by is **ARPU × retention vs cost-to-serve per relationship** — a far healthier equation than mass retail's frequency-of-losers.
+
+## The moat — and its honest limits
+
+| Moat | Why it holds | Where it's vulnerable |
+|---|---|---|
+| **iRage strategy IP + RA + broker registrations** | The specific combination (HFT operator + RA + broker) is needed to ship a black-box catalogue legally; few have it | Must never imply clients get prop alpha or expected returns |
+| **Pre-registration / zero client burden** | Clients skip filings, auditors, T+ delays | Each strategy still needs filing + RA dossier + fresh registration on logic change — "100+" is an ops bottleneck |
+| **Broker-native execution** | Orders run in Arrow's own risk/audit stack, not fragile third-party chains | Outages/defects become Arrow's direct liability |
+| **Client-owned account (not PMS)** | Removes the custody objection at crore scale | Must avoid any discretionary-management optic |
+| **Capacity discipline** | Honest capacity caps are a feature competitors hide | Caps limit revenue per strategy — by design |
+| **HNI white-glove** | Discount brokers structurally can't serve crore-scale incidents | High cost-to-serve; pricing must cover it |
+
+### Capacity & alpha-decay realism (the part that must stay honest)
+
+A strategy that works at ₹25L may not at ₹5cr or with 200 subscribers — crowdable edges decay. This is why the catalogue is a *ladder* of strategies whose edge does **not** depend on nanosecond exclusivity (execution algos, medium-frequency systematic, risk overlays, decayed-but-useful prop research), each with a hard capacity ledger, per-client caps, and **Open → Limited → Waitlist → Closed → Reduce-only → Paused → Retired** states ([Algo Cloud detail](/elite/algo-cloud/)). The honest claim is *"iRage's experience informs a capacity-capped catalogue,"* never *"we hand you the prop desk's alpha."* A sophisticated client who knows microstructure will *trust the firm more* for saying this plainly — and distrust any competitor who doesn't.
+
+<Aside type="caution" title="The pricing-disbelief risk">
+Competitors are free-to-₹9,000/mo; a premium Elite fee can look expensive without proof. The answer is to price against **service, governance and minimum capital** with tangible inclusions — named desk, audit/tax packs, risk cockpit, managed hosting, capacity access — not against a SaaS subscription. If a prospect compares Elite to Tradetron on price, the positioning has failed; it should be compared to *building an in-house quant desk*, which is the real alternative it replaces.
+</Aside>

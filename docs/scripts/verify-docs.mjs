@@ -34,6 +34,14 @@ const expectedRoutes = [
   'viability/trust-cold-start',
   'viability/pre-mortem',
   'viability/ai-without-advice',
+  'elite',
+  'elite/the-thesis',
+  'elite/big-ticket-segment',
+  'elite/algo-cloud',
+  'elite/regulatory-and-trust',
+  'elite/finding-the-whales',
+  'elite/pricing-and-economics',
+  'elite/pre-mortem',
 ];
 
 function walk(dir) {

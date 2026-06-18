@@ -1,0 +1,86 @@
+---
+title: "Finding the Whales — GTM"
+description: "The inverse-profiling acquisition engine: the signals that mark someone as big-ticket or high-frequency, where they appear, how to qualify and approach compliantly, and the concierge funnel."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+import Mermaid from '../../../components/Mermaid.astro';
+
+Arrow Elite is a low-volume, high-ARPU business, so the GTM is **not** mass acquisition — it is a precision sourcing engine. The principle: find public footprints that make a person demonstrably unlikely to be small retail, then qualify privately with consent. Full source detail: `research/18`. <Badge text="Public signals prioritise outreach; eligibility is confirmed privately with consent" variant="caution" />
+
+## The signal taxonomy
+
+Five families of public proof mark a target. Each is a *pointer to prioritise an invitation*, never a wealth dossier (see [DPDP guardrails](#dpdp--compliance-guardrails)).
+
+| Family | What it proves | Where it shows | Strongest tells |
+|---|---|---|---|
+| **Money proof** | Scale of capital | X/fintwit, Reddit, press | Broker-linked verified annual P&L (e.g. "Verified Zerodha PnL — ₹25L/365 days"), crore-margin/withdrawal screenshots, charges in lakhs |
+| **Frequency proof** | High-frequency / automation | API forums, GitHub, broker communities | Requests for **millisecond order timestamps**, 5,000+ instrument subscriptions, static-IP/TOPS/algo-ID questions, order-lifecycle debugging |
+| **Tooling proof** | Sophistication | Quantsapp, Sensibull, Streak, Tradetron, AlgoTest, GitHub | Advanced screenshots, strategy-creator status, live-deployment repos |
+| **Community proof** | Engaged seriousness | MadeForTrade, TradingQnA, Upstox Community, quant Telegram/Discord | Repeated technical posts on APIs, options, margin, execution, tax |
+| **Referral proof** | Vouched access | CAs, wealth managers, prop alumni, fintwit | F&O tax-audit practices, family-office advisors, ex-iRage/AlphaGrep/Graviton/Quadeye |
+
+## The signal-and-source map (high-value extract)
+
+| Signal | Source | Qualifying heuristic | Compliant approach |
+|---|---|---|---|
+| Broker-verified annual P&L ₹10L+ | Reddit/X recaps, broker screenshots | Real capital/skill/leverage; verify gross/net/realized | Invite to a confidential *cost/execution audit*, never comment on returns |
+| "X lakh in a day" with broker proof, repeated 3+ months | X, Reddit, YouTube Shorts | Repeatability separates skill from gambling | Lead with execution/risk/tax tooling, not "we saw your profit" |
+| Crore margin / option-selling capital screenshots | X, Telegram, Reddit | ₹50L–1cr+ deployed = direct fit | Opt-in "option-seller desk" webinar on margin/risk/tax, no calls |
+| Millisecond-timestamp / 5,000+ subscription API requests | MadeForTrade, TradingQnA, GitHub issues | Only serious automation needs this | "We're researching low-latency order observability" — technical advisory call |
+| Static-IP / TOPS / algo-ID / "In Review" questions | Upstox Community, MadeForTrade | Running or planning automation | Offer registration-readiness + Algo Cloud design-partner program |
+| Tradetron creator / AlgoTest live / Streak deploy | Platform communities, YouTube | Systematic, live-execution intent | Education-led: "backtest-to-live gap and registration friction" |
+| Indian-market algo GitHub repos (stars/forks) | GitHub | Technical influence; e.g. NSE-Stock-Scanner (320★) | Open-source-friendly: sponsor SDKs, invite maintainers to dev council |
+| Prop/HFT alumni (ex-iRage, AlphaGrep, Graviton, Quadeye, Estee…) | LinkedIn, talks | Strongest sophistication signal | Recruit as advisors/design partners under NDA — not for trade secrets |
+| CAs with F&O tax-audit practices | CA LinkedIn, tax YouTube | Know high-turnover, high-capital clients | CA-ready reports + client opt-in referral program |
+| Family-office / UHNI advisors | LinkedIn, PMS/AIF ecosystem | Introduce HNI capital with suitability filters | Introducer agreements, client consent, conflict disclosure |
+
+## The concierge funnel
+
+The motion is **invite-only**, not scraped cold spam. Public signals only decide *whom to invite*; everything after is consented.
+
+<Mermaid title="From public signal to governed Elite onboarding" chart={`flowchart LR
+    A["Public signal detected\n(money/frequency/tooling/community/referral)"] --> B["Human reviewer scores\n& classifies"]
+    B --> C["Public-safe first touch\nor warm intro"]
+    C --> D["Opt-in form\n(DPDP notice)"]
+    D --> E["Suitability &\nloss-capacity check"]
+    E --> F["Cost/execution/risk\naudit call"]
+    F --> G["Paper / live-shadow\nor limited-capital trial"]
+    G --> H["Elite onboarding:\nhard risk caps · named desk ·\nstrategy governance"]
+`} />
+
+A two-layer score keeps it disciplined: public signal decides the invite (5 = direct scale proof → concierge; 4 = frequency proof → technical interview; 3 = tooling → design partner; 2 = influencer/channel → referral partner; 1 = generic → nurture only). Private qualification after opt-in confirms capital (₹20L+ HNI / ₹1cr+ UHNI concierge), activity, automation, pain, and suitability — with **no growth-hack exceptions**.
+
+## The retail base funnels up (first-party, permissioned)
+
+docs1's serious-trader base is Arrow's *own* highest-quality lead source — surfaced by first-party behaviour, never third-party scraping:
+
+| In-product behaviour | Upgrade trigger | Elite offer |
+|---|---|---|
+| F&O turnover above threshold | Charges/tax/risk pain | True-cost audit + CA packet |
+| Margin/collateral above ₹20L | Pledge/cash optimization | Option-seller concierge |
+| API key + order APIs used | Static IP, rate limits, postbacks | Algo Cloud technical beta |
+| Heavy basket/iceberg/expiry trades | Legging/slippage risk | Expiry cockpit + execution audit |
+| High market-hours support severity | Needs named escalation | Elite support desk |
+| Multiple/family/HUF/company accounts | Reporting & permissioning | Family / pro-desk workspace |
+
+Show "you may qualify for Arrow Elite" **only** when thresholds are met, explain why, and ask the user to request a call — never expose hidden wealth scores to sales without consent.
+
+## DPDP & compliance guardrails
+
+Public footprints are not permission to build shadow profiles. Under the **DPDP Act (Rules operational since Nov 2025)** and SEBI/advertising rules:
+
+| Rule | Practical guardrail |
+|---|---|
+| Data minimization | Store only public URL, handle, signal category, date, reviewer note — never inferred income/net-worth/sensitive attributes |
+| Purpose limitation | Use signals only for "invitation to Elite qualification"; no reuse |
+| Consent before contact | Beyond a public reply, get platform-permitted basis or explicit opt-in; referrals require the client to opt in first |
+| Notice | Opt-in form states the iRage/Arrow entity, purpose, data categories, retention, withdrawal route, grievance contact |
+| Retention | Delete unqualified leads in 90–180 days unless they opt in |
+| No minors | Never target student communities with leveraged F&O/algo invitations |
+| No automated wealth scoring | Human review + private suitability, not algorithmic eligibility decisions |
+| SEBI advertising | No return claims, no P&L bait, no signal-selling; finfluencer partnerships need labels, registered-advice boundaries and compliance-reviewed scripts |
+
+<Aside type="note" title="Community as the trust engine, not a hype channel">
+Build an Arrow Elite council and content around **controls** — order-state timelines, latency measurement, static-IP readiness, option-seller margin, exchange registration, kill switches, incident RCAs. Never P&L contests, "top trader" rankings, copy-trading hype, signal rooms or client-profit screenshots. The credibility that attracts whales is the same discipline that keeps the product legal — they are one move.
+</Aside>

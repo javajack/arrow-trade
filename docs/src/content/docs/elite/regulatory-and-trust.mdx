@@ -1,0 +1,83 @@
+---
+title: "Regulatory & Trust Architecture"
+description: "The validated iRage registrations that make the Algo Cloud legal, the zero-client-registration mechanic, black-box RA obligations, the return-claims ban, and the broker × HFT-prop conflict that must be governed."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+This is the page the whole tier rests on. Everything else assumes the Algo Cloud is *legal* and *trusted*; here is the evidence and the obligations. Full sourcing: `research/16` in the repo. <Badge text="Compliance-grade, not legal advice" variant="caution" />
+
+## iRage: what is verified
+
+| Fact | Detail | Source basis | Confidence |
+|---|---|---|---|
+| Arrow ↔ iRage linkage | iRage's own site links "ARROW · Product of iRage" and `arrow.trade` | irage.in "What We Do" / "Who We Are" | High |
+| Broking entity | **iRage Broking Services LLP** (LLP ID AAD-8258) | iRage footer + ECN template | High |
+| SEBI broker registration | **INZ000011262**; proprietary trading in cash & derivatives at NSE, BSE, MCX | iRage contract-note/ECN | Medium-high (from iRage's statutory doc) |
+| **SEBI Research Analyst registration** | **INH000025425**, validity **Mar 12 2026 – Perpetual** | SEBI RA registry | High |
+| HFT / market-maker | Automated HF liquidity-providing, arbitrage, stat-arb; designated market maker in NSE silver options | iRage site + disclosure PDF | High |
+| Quantsapp relationship | **No sister-concern link found**; iRage's named venture is QuantInsti, not Quantsapp | iRage "Who We Are" | High (do not assert otherwise) |
+
+<Aside type="tip" title="Why the RA registration is the keystone">
+A broker distributing *decision-making* strategies whose logic the client can't see is, by SEBI's definition, distributing **black-box algos** — which legally requires the provider to be a **registered Research Analyst** with a research report per algo. iRage already holds RA registration **INH000025425**. Most brokers and every SaaS vendor do not. This single fact is what makes a 100+ black-box strategy catalogue buildable by Arrow and effectively no one else.
+</Aside>
+
+## The zero-client-registration mechanic (validated)
+
+The product's headline promise — clients run institutional algos without filing anything with SEBI — is legally sound under the [Feb 2025 framework](/algo/regulatory-framework/), with conditions:
+
+| Algo source | Client files own registration? | Conditions |
+|---|---|---|
+| Client self-developed, ≤10 OPS | No | Static IP/API/2FA/broker controls still apply |
+| Client self-developed, >10 OPS | **Yes** (through broker) | Auditor cert, write-ups, T+10 |
+| **Broker-generated (Arrow's catalogue)** | **No** | Broker obtains exchange permission per algo, tags orders with the exchange algo ID, remains principal |
+| Empanelled vendor algo | No | Vendor empanelled; broker due-diligences |
+
+So Arrow's catalogue is the broker-generated path: **Arrow registers each strategy once; eligible clients subscribe with no filing of their own.** The obligations Arrow cannot escape: exchange permission for *each* algo, order tagging, change-control, RMS, surveillance, grievance handling, and being the **principal** (it can never tell a client "that's between you and the vendor").
+
+## Black-box obligations and change control
+
+| Obligation | Implementation |
+|---|---|
+| Provider must be SEBI RA | iRage's INH000025425 — monitor renewal/status, show in disclosures |
+| Research report per black-box algo | An RA-controlled dossier per strategy: objective, universe, signal families, risk controls, assumptions, stress behaviour, capacity, conflicts |
+| Confirm report to exchange | Filing-checklist item for every black-box registration |
+| **Fresh registration on logic change** | Signal/model/entry-exit/hedge/alpha changes = new algo + new dossier. Client risk-cap changes (max loss, allowed instruments) are parameters, not logic — but compliance decides the line |
+
+This change-control reality is *why* the catalogue is an ops commitment ([Algo Cloud page](/elite/algo-cloud/)): iterating a strategy is not a code push, it is a re-filing.
+
+## The return-claims ban shapes everything client-facing
+
+SEBI's **Sep 2, 2022 circular** (via [NSE/COMP/53555](https://nsearchives.nseindia.com/content/circulars/COMP53555.pdf)) bars brokers providing algo services from referring — directly or indirectly — to past or expected returns/performance, and from associating with platforms that do. Practically:
+
+- No CAGR, monthly return, "expected profit", backtested-return headline, win-rate, or creator leaderboard ranked by returns.
+- If Arrow ever lists third-party strategies, their landing pages, screenshots and videos must also be compliant.
+- Quality is shown through **risk controls, capacity state, operational metrics, and the client's own post-trade reporting** — never performance marketing ([compliant display detail](/elite/algo-cloud/)).
+
+## Suitability & accredited-investor gating
+
+SEBI's accredited-investor framework (Aug 2021) is a useful *additional* eligibility filter for high-risk strategies — but it removes **none** of the algo-framework duties (RA, registration, return-ban, broker-principal, static IP, RMS). And it does **not** authorize PMS/AIF-style discretion, which is out of scope. Suitability controls SEBI would expect:
+
+- Product-governance committee approving each strategy before filing (target client, risk class, leverage, drawdown, capacity, kill criteria, conflicts).
+- Client segmentation: minimum net worth/capital, derivatives activation, experience, loss-bearing capacity, accredited status where applicable.
+- Explicit F&O risk acceptance, per-client hard risk caps, cooling-off on first activation, no guaranteed-return arrangements.
+
+## The conflict that must be governed: broker × HFT prop
+
+Arrow Elite's differentiator — iRage's prop/HFT pedigree — is also its sharpest risk. The same group runs proprietary HFT/market-making *and* distributes strategies to clients. SEBI (post the NSE co-location history) will scrutinize this hard, and it must be governed, not disclaimed.
+
+| Conflict | Governance answer |
+|---|---|
+| Prop could see client order flow / front-run | Hard information barriers; no client order/position data to prop researchers; access logs; trade-ahead surveillance |
+| Prop competes with client strategies for queue/liquidity | Capacity caps; documented client-vs-prop routing fairness; queue-priority surveillance |
+| Marketing implies clients get prop alpha | Ban prop-performance references; sell controls and risk, never prop P&L |
+| Market-maker obligations vs client interest | Avoid distributing client strategies in instruments where iRage has designated MM obligations unless specifically approved and disclosed |
+| Same logic in prop and client products | Separate signals/venues/instruments/latency classes/capacity pools — or disclose and govern explicitly |
+
+<Aside type="caution" title="The trust equation">
+At crore scale, trust is binary and catastrophic-tailed — and an HFT-owned broker starts with a *harder* question than a normal one: "is my broker trading against me?" The answer must be a visible governance package (information barriers, no-prop-priority guarantee, conflict disclosures, board oversight, surveillance), plus the [docs1 trust machinery](/viability/trust-cold-start/) — named desk, withdrawal SLA, ledger reconciliation, custody proof. iRage's clean RA/broker complaint record and institutional standing are the cold-start anchor; weak conflict governance would forfeit it instantly. This is the headline item in the [Pre-Mortem](/elite/pre-mortem/).
+</Aside>
+
+## The compliant product posture, in one sentence
+
+> Exchange-registered, broker-hosted automated strategies run in the client's own account, with RA-governed black-box dossiers, capacity controls, information barriers between client and prop, transparent charges and conflict disclosures. No returns are promised or represented.

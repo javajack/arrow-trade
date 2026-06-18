@@ -1,0 +1,53 @@
+---
+title: "The Big-Ticket Segment & Pain Registry"
+description: "Who the four target profiles are, and the full evidence-backed registry of what hurts them in the NSE/BSE/MCX algo arena — the pains Arrow Elite exists to solve."
+---
+
+import { Aside, Badge, Card, CardGrid } from '@astrojs/starlight/components';
+
+The targeting logic is **inverse profiling**: instead of defining a small-retail user and serving them, define everyone who is demonstrably *not* small retail and serve those. Four profiles qualify, and they share a pain surface that discount brokers and SaaS tools structurally cannot address. Evidence detail and sources: `research/17` in the repo.
+
+## The four profiles
+
+| Profile | Capital / behaviour | What they want | What they won't tolerate |
+|---|---|---|---|
+| **HNI active trader** | ₹20L–1cr; option selling/buying, part discretionary, part API | Better execution, lower true cost, margin efficiency, clean tax | One bad incident, surprise charges, support silence |
+| **UHNI / family office** | ₹1cr+; capital preservation + opportunistic F&O/commodity | Governance, capacity transparency, named service, conflict clarity | Black-box anything without controls, custody doubt |
+| **Verified-PnL pro / supertrader** | High trade count; slippage/latency/cost sensitive | Deterministic execution, observability, speed, control | Fragile APIs, static-IP pain, silent order-semantics changes |
+| **Small institution / treasury** | HUF/LLP/prop-like; audit & controls | Maker-checker, audit logs, policy limits, reporting | Consumer workflows, no institutional logs |
+
+## The pain registry (ranked, evidence-backed)
+
+These are the validated pains from forums, app stores, press and our first-party scrape — the ones acute enough that solving them justifies a premium relationship.
+
+| # | Pain | What it feels like | Evidence | Most affected |
+|---:|---|---|---|---|
+| 1 | **No access to institutional strategies** | Can buy tools/APIs, but not a vetted, capacity-managed, professionally-run strategy stack | iRage runs HFT/market-making/stat-arb managing "millions of orders" daily; retail APIs sell pipes, not operated strategy | UHNI, HNI, pros |
+| 2 | **DIY algos are fragile** | Trader becomes dev + SRE + integration + compliance engineer | Dhan's 2025 API change forced every trader onto 24h tokens, OAuth, TOTP, static IP overnight ([MadeForTrade](https://madefortrade.in/t/update-for-api-traders-new-changes-in-dhanhq-api-authentication-process-and-updates/56286)) | DIY quants, pros |
+| 3 | **Registration bureaucracy** | Static IP, auditor cert, algo IDs, T+10 delays, change-control on every logic tweak | The [SEBI 2025 framework](/algo/regulatory-framework/) makes this a real ops workflow | HNI DIY quants, small institutions |
+| 4 | **Latency / colo gap** | Retail "7ms" vs institutional sub-microsecond is structural, not cosmetic | Fyers markets 7ms; iRage's institutional stack claims sub-µs order-send | Supertraders, small prop |
+| 5 | **Slippage at size** | Large orders expose queue, depth, market-protection, rejects | Dhan users reported market→limit conversion and missed exits, "missed out on a huge profit" ([MadeForTrade](https://madefortrade.in/t/market-orders-automatically-converted-to-limit-order/61603)) | UHNI option writers, scalpers |
+| 6 | **Capacity limits & alpha decay** | An edge that works at ₹25L dies at ₹5cr or with 200 subscribers — and nobody discloses it | Microstructure reality; retail marketplaces hide capacity | UHNI, family offices, pros |
+| 7 | **Margin & capital efficiency** | Cash/non-cash split, pledge mechanics, haircuts, intraday collateral charges, shortfall interest | "Zerodha charging for intraday collateral" drew 145 upvotes; charges-exceed-profit posts ([first-party scrape](/pain-signals/verified-pain-registry/)) | HNI/UHNI option sellers, treasuries |
+| 8 | **Multi-strategy risk monitoring** | Many algos + discretionary = hidden net Greeks, concentration, correlated stops | Discount-broker UX is account-centric, not strategy-stack-centric | UHNI/family offices, institutions |
+| 9 | **Backtest-to-live gap** | Live adds slippage, rejects, MPP, partial fills, data glitches, costs | Dhan order-conversion + AngelOne cloud-IP timeout cases | DIY quants, pros |
+| 10 | **Trust/custody at crore scale** | Withdrawal, ledger accuracy, fraud, solvency, grievance fears amplify with size | The ₹5cr-withdrawal dispute (572-upvote thread; [ET](https://m.economictimes.com/news/new-updates/hi-dr-nithin-kamath-responds-to-mumbai-doctors-claim-about-the-zerodha-scam/articleshow/125074689.cms)) | UHNI/family office, institutions |
+| 11 | **Fragmented tooling** | Analytics + execution + journal + tax + ledgers in separate systems, glued by "jugaad" | TradingQnA users hand-build watchlists via string parsing ([thread](https://tradingqna.com/t/provide-access-of-predefined-watchlists-on-kite-api/194032)) | Pros, HNI quants |
+| 12 | **Reliability/outages** | An outage at open/expiry turns a manageable position into a forced loss | Zerodha Sep-2025 glitch; Dec-2025 Cloudflare multi-broker outage | All leveraged users |
+| 13 | **Tax/accounting complexity** | High-volume F&O is business income, ITR-3/audit territory | F&O = business income, audit thresholds apply ([TOI](https://timesofindia.indiatimes.com/business/financial-literacy/taxation/itr-filing-fy-2024-25-how-to-report-fo-income-in-your-income-tax-return-check-details/articleshow/123379622.cms)) | HNI/UHNI, pros, treasuries |
+| 14 | **No white-glove service** | Forum/ticket support is unacceptable when a ₹1cr+ position has an incident | Upstox "unresponsive customer care… escalate to SEBI" ([thread](https://community.upstox.com/t/complaint-regarding-unresponsive-customer-care-at-upstox-no-response-on-022-24229920/13475)) | UHNI/family office, institutions |
+
+## The reframe: every pain is a premium-service surface
+
+Discount brokers treat items 3, 8, 10, 13 and 14 as cost centers to minimize. For the big-ticket segment they are exactly what a premium relationship is *for*. Arrow Elite's product ([Algo Cloud](/elite/algo-cloud/)) and service model turn each pain into a paid, governed capability:
+
+| Pain cluster | Elite response |
+|---|---|
+| Strategy access + registration + fragility (1,2,3,9) | Broker-registered Algo Cloud: turnkey, hosted, zero client registration |
+| Execution + latency + slippage (4,5,12) | Broker-native low-latency execution with measured latency ledger and order audit |
+| Capacity + risk + margin (6,7,8) | Capacity caps, collateral optimizer, portfolio risk cockpit, per-strategy/account kill switches |
+| Trust + tax + service (10,11,13,14) | iRage-anchored custody trust, CA-ready reporting, unified cockpit, named market-hours desk |
+
+<Aside type="note" title="The mis-selling backdrop that disciplines all of it">
+SEBI's FY25 study found 91% of individual F&O traders lost money. A premium algo product sold to big money must be visibly *not* a get-rich pitch: suitability checks, loss-capacity gating, capacity honesty, and zero return claims are mandatory product defenses, not legal afterthoughts. The [Pre-Mortem](/elite/pre-mortem/) treats this as an existential risk, not a footnote.
+</Aside>
